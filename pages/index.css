@@ -17,6 +17,12 @@
 @import url('../blocks/profile/__description/profile__description.css');
 @import url('../blocks/profile/__add-button/profile__add-button.css');
 
+@import url('../blocks/elements/elements.css');
+@import url('../blocks/element/element.css');
+@import url('../blocks/element/__image/element__image.css');
+@import url('../blocks/element/__caption-group/element__caption-group.css');
+@import url('../blocks/element/__caption/element__caption.css');
+@import url('../blocks/element/__like/element__like.css');
 
 .ol {
   outline: 1px solid red;
