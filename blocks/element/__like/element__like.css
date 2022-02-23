@@ -1,8 +1,8 @@
 .element__like {
-    background-image: url(../../../images/element/heart.svg);
+    background-image: url('../../../images/element/heart.svg');
     background-repeat: no-repeat;
     background-position: center;
-    width: 22px;
+    min-width: 22px;
     height: 19px;
     margin-right: 5px;
     margin-left: auto;
