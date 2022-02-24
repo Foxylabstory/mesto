@@ -1,83 +1,105 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8">
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body class="page">
-  
-  <header class="header">
-    <div class="header__logo"></div>
-    <div class="header__line"></div>
-  </header>
 
-  <main class="main">
-    <section class="profile" aria-label="секция описывающая профиль">
-        <div class="profile__avatar"></div>
-        <div class="profile__info">
-            <div class="profile__name-block">
-                <p class="profile__name">Жак-Ив Кусто</p>
-                <div class="profile__edit-button hover hover_button"></div>
+    <header class="header">
+        <div class="header__logo"></div>
+        <div class="header__line"></div>
+    </header>
+
+    <main class="main">
+        <section class="profile" aria-label="секция описывающая профиль">
+            <div class="profile__avatar"></div>
+            <div class="profile__info">
+                <div class="profile__name-block">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <div class="profile__edit-button hover hover_button"></div>
+                </div>
+                <p class="profile__description">Исследователь океана</p>
             </div>
-            <p class="profile__description">Исследователь океана</p>
+            <div class="profile__add-button hover hover_button"></div>
+        </section>
+
+        <section class="elements" aria-label="секция описывающая места">
+            <figure class="element">
+                <img class="element__image" src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg"
+                    alt="река Колумбия">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">река Колумбия</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+            <figure class="element">
+                <img class="element__image" src="./images/element/kirill-pershin-1404681-unsplash.png"
+                    alt="Гора Эльбрус">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">Гора Эльбрус</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+            <figure class="element">
+                <img class="element__image" src="./images/element/kirill-pershin-1556355-unsplash.png"
+                    alt="горы Домбая">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">Домбай</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+            <figure class="element">
+                <img class="element__image" src="./images/element/woody-kelly-54ruWGh625k-unsplash.jpg"
+                    alt="Где то на рассвете">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">На рассвете в горах</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+            <figure class="element">
+                <img class="element__image" src="./images/element/luis-eN1BVNna9hg-unsplash.jpg" alt="Тихий океан">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">Тихий океан</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+            <figure class="element">
+                <img class="element__image" src="./images/element/kirill-pershin-1088404-unsplash.png"
+                    alt="замок в Карачаево-Черкессии">
+                <div class="element__caption-group">
+                    <figcaption class="element__caption">Карачаево-Черкесск</figcaption>
+                    <div class="element__like hover hover_like"></div>
+                </div>
+            </figure>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2022. Foxylab</p>
+    </footer>
+    <section class="popup popup_opened">
+        <div class="popup__container">
+            <h2 class="popup__header">Редактировать профиль</h2>
+            <form class="popup__form" autocomplete="on">
+                <fieldset class="popup__fieldset-user">
+                    <label class="popup__hidden-label" for="popup-name">Ваше имя</label>
+                    <input class="popup__input popup__input-name" id="popup-name" type="text" required maxlength="40" minlength="2" placeholder="Введите ваше имя">
+                    <div class="popup__line"></div>
+                    <label class="popup__hidden-label" for="popup-description">О себе</label>
+                    <input class="popup__input popup__input-description" id="popup-description" type="text" required maxlength="200" minlength="2" placeholder="Расскажите о себе">
+                    <div class="popup__line"></div>
+                    <button class="popup__button" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
+            <button class="popup__form-closer" type="button" aria-label="Закрыть форму"></button>
         </div>
-        <div class="profile__add-button hover hover_button"></div>
     </section>
-
-    <section class="elements" aria-label="секция описывающая места">
-        <figure class="element">
-            <img class="element__image" src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg" alt="река Колумбия">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">река Колумбия</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-        <figure class="element">
-            <img class="element__image" src="./images/element/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">Гора Эльбрус</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-        <figure class="element">
-            <img class="element__image" src="./images/element/kirill-pershin-1556355-unsplash.png" alt="горы Домбая">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">Домбай</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-        <figure class="element">
-            <img class="element__image" src="./images/element/woody-kelly-54ruWGh625k-unsplash.jpg" alt="Где то на рассвете">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">На рассвете в горах</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-        <figure class="element">
-            <img class="element__image" src="./images/element/luis-eN1BVNna9hg-unsplash.jpg" alt="Тихий океан">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">Тихий океан</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-        <figure class="element">
-            <img class="element__image" src="./images/element/kirill-pershin-1088404-unsplash.png" alt="замок в Карачаево-Черкессии">
-            <div class="element__caption-group">
-                <figcaption class="element__caption">Карачаево-Черкесск</figcaption>
-                <div class="element__like hover hover_like"></div>
-            </div>
-        </figure>
-    </section>
-    
-  </main>
-
-  <footer class="footer">
-    <p class="footer__copyright">© 2022. Foxylab</p>
-  </footer>
-  
 </body>
+
 </html>
