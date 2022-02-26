@@ -2,10 +2,10 @@ let popup = document.querySelector(".popup"); //находим попап
 let formElement = popup.querySelector(".popup__form"); // находим всю форму, пригодится для кнопки Submit
 let openPopup = document.querySelector(".profile__edit-button"); //находим кнопку открытия редактирования профиля
 let closePopup = popup.querySelector(".popup__form-closer"); //находим кнопку закрытия редактирования профиля
-let submitButton = popup.querySelector(".popup__button"); //находим кнопку СОХРАНИТЬ
+//let submitButton = popup.querySelector(".popup__button"); //находим кнопку СОХРАНИТЬ
 let authorName = document.querySelector(".profile__name"); //находим элемент имени пользователя
 let authorDescription = document.querySelector(".profile__description"); //находим элемент описания пользователя пользователя
-let personal = popup.querySelectorAll(".popup__input"); //находим элемент формы описывающий пользователя - бесполезная переменная
+//let personal = popup.querySelectorAll(".popup__input"); //находим элемент формы описывающий пользователя - бесполезная переменная
 let popupAuthorName = popup.querySelector("#popup-name"); //находим input c именем пользователя
 let popupAuthorDescription = popup.querySelector("#popup-description"); //находим input c описанием пользователя
 

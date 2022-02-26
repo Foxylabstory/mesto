@@ -1,6 +1,6 @@
 .hover {
-    cursor: pointer;
-    transition: opacity 0.4s ease;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
 }
 
 /*.hover:hover {

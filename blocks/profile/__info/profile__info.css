@@ -1,11 +1,11 @@
-.profile__info{
-    margin: auto 0 auto 30px;
-    max-width: 345px;
-    color: #fff;
+.profile__info {
+  margin: auto 0 auto 30px;
+  max-width: 345px;
+  color: #fff;
 }
 
 @media (max-width: 325px) {
-    .profile__info {
-        margin: 0;
-    }
+  .profile__info {
+    margin: 0;
+  }
 }
