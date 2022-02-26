@@ -2,3 +2,11 @@
     display: flex;
     align-items: baseline;
 }
+
+@media (max-width: 325px) {
+    .profile__name-block {
+        width: 282px;
+        justify-content: center;
+    }
+    
+}

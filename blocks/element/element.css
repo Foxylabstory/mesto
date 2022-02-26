@@ -5,3 +5,10 @@
     max-width: 282px;
     max-height: 361px;
 }
+
+@media (max-width: 618px) {
+    .element {
+        min-height: 361px;
+    }
+    
+}

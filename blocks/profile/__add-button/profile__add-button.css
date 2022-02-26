@@ -9,3 +9,10 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+@media (max-width: 434px) {
+    .profile__add-button{
+        width: 282px;
+        margin: 8px auto 0 auto;
+    }
+}
