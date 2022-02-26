@@ -8,7 +8,7 @@
   line-height: 22px;
   text-align: center;
   color: #ffffff;
-  margin-top: 18px;
+  margin-top: 24px;
   margin-bottom: 37px;
   border-style: none;
   transition: opacity 0.4s easy;
@@ -25,5 +25,7 @@
     height: 46px;
     font-size: 14px;
     line-height: 17px;
+    margin-top: 21px;
+    margin-bottom: 25px;
   }
 }

@@ -2,7 +2,7 @@
   border: none;
   width: 358px;
   height: 27px;
-  padding-bottom: 13px;
+  padding-bottom: 4px;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
@@ -13,5 +13,6 @@
 @media (max-width: 450px) {
   .popup__input {
     width: 238px;
+    
   }
 }
