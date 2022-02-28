@@ -17,7 +17,6 @@
   <body class="page">
     <header class="header">
       <div class="header__logo"></div>
-      <div class="header__line"></div>
     </header>
 
     <main class="main">
@@ -26,116 +25,119 @@
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <div class="profile__edit-button hover hover_button"></div>
+            <button class="profile__edit-button" type="button"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <div class="profile__add-button hover hover_button"></div>
+        <button class="profile__add-button" type="button"></button>
       </section>
 
       <section class="elements" aria-label="секция описывающая места">
-        <figure class="element">
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg"
             alt="река Колумбия"
           />
           <div class="element__caption-group">
-            <p class="element__caption">река Колумбия</p>
-            <div class="element__like hover hover_like"></div>
+            <h2 class="element__caption">река Колумбия</h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
-        <figure class="element">
+        </div>
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/kirill-pershin-1404681-unsplash.png"
             alt="Гора Эльбрус"
           />
           <div class="element__caption-group">
-            <p class="element__caption">Гора Эльбрус</p>
-            <div class="element__like hover hover_like"></div>
+            <h2 class="element__caption">Гора Эльбрус</h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
-        <figure class="element">
+        </div>
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/kirill-pershin-1556355-unsplash.png"
             alt="горы Домбая"
           />
           <div class="element__caption-group">
-            <p class="element__caption">Домбай</p>
-            <div class="element__like hover hover_like"></div>
+            <h2 class="element__caption">Домбай</h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
-        <figure class="element">
+        </div>
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/woody-kelly-54ruWGh625k-unsplash.jpg"
             alt="Где то на рассвете"
           />
           <div class="element__caption-group">
-            <p class="element__caption">
+            <h2 class="element__caption">
               На рассвете в горах
-            </p>
-            <div class="element__like hover hover_like"></div>
+            </h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
-        <figure class="element">
+        </div>
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/luis-eN1BVNna9hg-unsplash.jpg"
             alt="Тихий океан"
           />
           <div class="element__caption-group">
-            <p class="element__caption">Тихий океан</p>
-            <div class="element__like hover hover_like"></div>
+            <h2 class="element__caption">Тихий океан</h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
-        <figure class="element">
+        </div>
+        <div class="element">
           <img
             class="element__image"
             src="./images/element/kirill-pershin-1088404-unsplash.png"
             alt="замок в Карачаево-Черкессии"
           />
           <div class="element__caption-group">
-            <p class="element__caption">Карачаево-Черкесск</p>
-            <div class="element__like hover hover_like"></div>
+            <h2 class="element__caption">Карачаево-Черкесск</h2>
+            <button class="element__like" type="button"></button>
           </div>
-        </figure>
+        </div>
+        
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2022. Foxylab</p>
     </footer>
-    <section class="popup" aria-label="секция описывающая попап">
+    <div class="popup" aria-label="секция описывающая попап">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="popup__form" autocomplete="on">
+        <form class="popup__form" name="popup-form" autocomplete="on">
           <fieldset class="popup__fieldset-user">
             <label class="popup__hidden-label" for="popup-name">Ваше имя</label>
             <input
-              class="popup__input popup__input-name"
+              class="popup__input"
               id="popup-name"
+              name="popup-input-name"
               type="text"
               required
               maxlength="40"
               minlength="2"
               placeholder="Введите ваше имя"
             />
-            <div class="popup__line"></div>
+            <!--<div class="popup__line"></div>-->
             <label class="popup__hidden-label" for="popup-description"
               >О себе</label
             >
             <input
-              class="popup__input popup__input-description"
+              class="popup__input"
               id="popup-description"
+              name="popup-input-description"
               type="text"
               required
               maxlength="200"
               minlength="2"
               placeholder="Расскажите о себе"
             />
-            <div class="popup__line"></div>
+            <!--<div class="popup__line"></div>-->
             <button class="popup__button" type="submit">Сохранить</button>
           </fieldset>
         </form>
@@ -145,7 +147,7 @@
           aria-label="Закрыть форму"
         ></button>
       </div>
-    </section>
+    </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

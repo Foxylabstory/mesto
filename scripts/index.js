@@ -48,9 +48,9 @@ popup.addEventListener(
     if (event.target === event.currentTarget) {
       //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
       closedPopup();
-    } else {
+    } /*else {
       openedPopup();
-    }
+    }*/
   },
   true
 );
