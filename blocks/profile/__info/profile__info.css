@@ -4,8 +4,9 @@
   color: #fff;
 }
 
-@media (max-width: 325px) {
+@media (max-width: 400px) {
   .profile__info {
+    max-width: 282px;
     margin: 0;
   }
 }

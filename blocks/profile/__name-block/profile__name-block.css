@@ -1,11 +1,12 @@
 .profile__name-block {
   display: inline-flex;
   align-items: baseline;
+  max-width: 336px;
 }
 
-@media (max-width: 325px) {
+@media (max-width: 400px) {
   .profile__name-block {
-    width: 282px;
+    max-width: 282px;
     justify-content: center;
   }
 }
