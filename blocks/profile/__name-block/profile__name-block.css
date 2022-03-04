@@ -5,6 +5,7 @@
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
   align-items: baseline;
+  max-width: 336px;
 }
 
 @media (max-width: 325px) {

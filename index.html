@@ -25,7 +25,7 @@
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button"></button>
+            <button class="profile__edit-button" id="profile-edit-button" type="button"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
@@ -82,15 +82,15 @@
     <footer class="footer">
       <p class="footer__copyright">© 2022. Foxylab</p>
     </footer>
-    <div class="popup" aria-label="секция описывающая попап">
+    <div class="popup" id="popup-profile" aria-label="секция описывающая попап редактирования профиля">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form" autocomplete="on">
-          <fieldset class="popup__fieldset-user">
-            <label class="popup__hidden-label" for="popup-name">Ваше имя</label>
+        <form class="popup__form" id="form-profile" name="popup-form" autocomplete="on">
+          <fieldset class="popup__fieldset">
+            <label class="popup__hidden-label" for="name-profile">Ваше имя</label>
             <input
               class="popup__input"
-              id="popup-name"
+              id="name-profile"
               name="popup-input-name"
               type="text"
               required
@@ -98,12 +98,12 @@
               minlength="2"
               placeholder="Введите ваше имя"
             />
-            <label class="popup__hidden-label" for="popup-description"
+            <label class="popup__hidden-label" for="description-profile"
               >О себе</label
             >
             <input
               class="popup__input"
-              id="popup-description"
+              id="description-profile"
               name="popup-input-description"
               type="text"
               required
@@ -116,11 +116,49 @@
         </form>
         <button
           class="popup__form-closer"
+          id="profile-closer"
           type="button"
           aria-label="Закрыть форму"
         ></button>
       </div>
     </div>
+
+    <div class="popup" aria-label="секция описывающая попап добавления карточки">
+      <div class="popup__container">
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form" name="popup-form" autocomplete="on">
+          <fieldset class="popup__fieldset">
+            <label class="popup__hidden-label" for="name-card">Название</label>
+            <input
+              class="popup__input"
+              id="name-card"
+              name="popup-input-card"
+              type="text"
+              required
+              maxlength="40"
+              minlength="2"
+              placeholder="Название"
+            />
+            <label class="popup__hidden-label" for="link-card">Ссылка на картинку</label>
+            <input
+              class="popup__input"
+              id="link-card"
+              name="popup-input-link"
+              type="url"
+              required
+              placeholder="Ссылка на картинку"
+            />
+            <button class="popup__button" type="submit">Создать</button>
+          </fieldset>
+        </form>
+        <button
+          class="popup__form-closer"
+          type="button"
+          aria-label="Закрыть форму"
+        ></button>
+      </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
