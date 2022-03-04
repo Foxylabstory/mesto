@@ -29,7 +29,7 @@
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-button" type="button"></button>
+        <button class="profile__add-button" id="profile-add-button" type="button"></button>
       </section>
 
       <section class="elements" aria-label="секция описывающая места">
@@ -123,10 +123,10 @@
       </div>
     </div>
 
-    <div class="popup" aria-label="секция описывающая попап добавления карточки">
+    <div class="popup" id="popup-card" aria-label="секция описывающая попап добавления карточки">
       <div class="popup__container">
         <h2 class="popup__header">Новое место</h2>
-        <form class="popup__form" name="popup-form" autocomplete="on">
+        <form class="popup__form" id="form-card" name="popup-form" autocomplete="on">
           <fieldset class="popup__fieldset">
             <label class="popup__hidden-label" for="name-card">Название</label>
             <input
@@ -153,6 +153,7 @@
         </form>
         <button
           class="popup__form-closer"
+          id="card-closer"
           type="button"
           aria-label="Закрыть форму"
         ></button>
