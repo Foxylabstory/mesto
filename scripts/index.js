@@ -107,9 +107,12 @@ formElementProfile.addEventListener("submit", formSubmitHandlerProfile);
 
 //далее попап с добавлением карточки
 
-let openPopupCard = document.querySelector("#profile-add-button"); //находим кнопку открытия попапа добавления карточки
-let popupCard = document.querySelector("#popup-card"); //находим попап порфиля
-let closePopupCard = popupCard.querySelector("#card-closer"); //находим кнопку закрытия попапа добавления карточки
+let openPopupCard = document.querySelector("#profile-add-button");//находим кнопку открытия попапа добавления карточки
+let popupCard = document.querySelector("#popup-card");//находим попап добавления карточки
+let closePopupCard = popupCard.querySelector("#card-closer");//находим кнопку закрытия попапа добавления карточки
+let formElementCard = popupCard.querySelector("#form-card");//находим форму попапа добавления карточки, нужно для того что бы кнопка submit работала как нужно
+let popupPlaceName = popupCard.querySelector("#name-card"); //находим input c названием места
+let popupPlaceUrl = popupCard.querySelector("#link-card"); //находим input c сылкой на картинку
 
 //функция добавления класса попапу добавления карточки
 function openedPopupCard() {
@@ -120,6 +123,21 @@ function openedPopupCard() {
 function closedPopupCard() {
   popupCard.classList.remove("popup_opened");
 };
+
+function formSubmitHandlerCard(evt) {
+  evt.preventDefault(); //сборс стандартной отправки
+  console.log(popupPlaceName.value);
+  console.log(popupPlaceUrl.value);
+  elements.insertAdjacentHTML('afterBegin', `
+    <div class="element">
+      <img class="element__image" src="${popupPlaceUrl.value}" alt="${popupPlaceName.value}"/>
+      <div class="element__caption-group">
+        <h2 class="element__caption">${popupPlaceName.value}</h2>
+        <button class="element__like" type="button"></button>
+      </div>
+    </div>`);//${input[i].link} указывается массив, его индекс, .данные по ключу
+  closedPopupCard(); //удаляет класс .popup_opened
+}
 
 //слушатель кнопки добавления карточки
 openPopupCard.addEventListener("click", openedPopupCard);
@@ -139,3 +157,5 @@ popupCard.addEventListener("click",
   },
   true
 );
+
+formElementCard.addEventListener("submit", formSubmitHandlerCard);
