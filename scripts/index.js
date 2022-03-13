@@ -1,4 +1,15 @@
-let elements = document.querySelector(".elements"); // находим секцию с карточками
+const elements = document.querySelector(".elements"); // находим секцию с карточками
+const popupProfile = document.querySelector('#popup-profile');
+const formProfile = popupProfile.querySelector('#form-profile');
+const closeProfile = popupProfile.querySelector('#profile-closer');
+const authorName = document.querySelector('.profile__name');
+const authorDescription = document.querySelector(".profile__description");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const popupProfileAuthorName = popupProfile.querySelector("#name-profile");
+const popupProfileAuthorDescription = popupProfile.querySelector('#description-profile');
+
+const popupCard = document.querySelector('#popup-card');
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -40,122 +51,52 @@ function addCards(input) {//описываем функцию добавлени
   };
 };
 
-// заполняем секцию elements
-addCards(initialCards);//вызываем функцию
-
-
-//далее все что касается попапа с профилем пользователя
-
-let popupProfile = document.querySelector("#popup-profile"); //находим попап порфиля
-let formElementProfile = popupProfile.querySelector("#form-profile"); // находим всю форму профайла, пригодится для кнопки Submit
-let openPopupProfile = document.querySelector("#profile-edit-button"); //находим кнопку открытия редактирования профиля
-let closePopupProfile = popupProfile.querySelector("#profile-closer"); //находим кнопку закрытия редактирования профиля
-//let submitButton = popup.querySelector(".popup__button"); //находим кнопку СОХРАНИТЬ
-let authorName = document.querySelector(".profile__name"); //находим элемент имени пользователя
-let authorDescription = document.querySelector(".profile__description"); //находим элемент описания пользователя пользователя
-//let personal = popup.querySelectorAll(".popup__input"); //находим элемент формы описывающий пользователя - бесполезная переменная
-let popupAuthorName = popupProfile.querySelector("#name-profile"); //находим input c именем пользователя
-let popupAuthorDescription = popupProfile.querySelector("#description-profile"); //находим input c описанием пользователя
-
-
-//функции
-
 //добавляет класс .popup_opened
-function openedPopupProfile() {
-  popupProfile.classList.add("popup_opened");
+function openPopup(somePopup) {
+  somePopup.classList.add("popup_opened");
 };
 
 //убирает класс .popup_opened
-function closedPopupProfile() {
-  popupProfile.classList.remove("popup_opened");
+function closePopup(somePopup) {
+  somePopup.classList.remove("popup_opened");
 };
 
-//решение предложенное платформой
-function formSubmitHandlerProfile(evt) {
+function formProfileSubmitHandler(evt) {
   evt.preventDefault(); //сборс стандартной отправки
-  authorName.textContent = popupAuthorName.value; //обратное действие, в текстовое значение объекта записываем тестовое содержимое песевдомассива input
-  authorDescription.textContent = popupAuthorDescription.value;
-  closedPopupProfile(); //удаляет класс .popup_opened
-}
+  authorName.textContent = popupProfileAuthorName.value; //обратное действие, в текстовое значение объекта записываем тестовое содержимое песевдомассива input
+  authorDescription.textContent = popupProfileAuthorDescription.value;
+  closePopup(popupProfile); //удаляет класс .popup_opened
+};
 
-//слушатели
-// слушатель по кнопке редактировать профиль, для того что бы открывать попап
-openPopupProfile.addEventListener("click", function () {
-  popupAuthorName.value = authorName.textContent;
-  popupAuthorDescription.value = authorDescription.textContent;
-  openedPopupProfile(); //добавляет класс .popup_opened
+// заполняем секцию elements
+addCards(initialCards);
+
+// слушатель по кнопке редактировать профиль, для того что бы открывать попап пофиля
+profileEditButton.addEventListener("click", function () {
+  popupProfileAuthorName.value = authorName.textContent;
+  popupProfileAuthorDescription.value = authorDescription.textContent;
+  openPopup(popupProfile); //добавляет класс .popup_opened
 });
 
-//слушатель по кнопке закрыть попап, что бы собственно попап закрывать
-closePopupProfile.addEventListener("click", closedPopupProfile);
-
-//слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме контейнера
-popupProfile.addEventListener("click",
-  function (event) {
-    if (event.target === event.currentTarget) {
-      //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
-      closedPopupProfile();
-    } /*else {
-      openedPopup();
-    }*/
-  },
-  true
-);
 //должно сохранять имя пользователя и описание пользователя в разделе профиль
-formElementProfile.addEventListener("submit", formSubmitHandlerProfile);
+formProfile.addEventListener("submit", formProfileSubmitHandler);
 
+//слушатель по кнопке закрыть попап пофиля, что бы собственно попап закрывать
+//closeProfile.addEventListener("click", closePopup(popupProfile));
+closeProfile.addEventListener('click', function () {
+  closePopup(popupProfile);
+});
 
-//далее попап с добавлением карточки
-
-let openPopupCard = document.querySelector("#profile-add-button");//находим кнопку открытия попапа добавления карточки
-let popupCard = document.querySelector("#popup-card");//находим попап добавления карточки
-let closePopupCard = popupCard.querySelector("#card-closer");//находим кнопку закрытия попапа добавления карточки
-let formElementCard = popupCard.querySelector("#form-card");//находим форму попапа добавления карточки, нужно для того что бы кнопка submit работала как нужно
-let popupPlaceName = popupCard.querySelector("#name-card"); //находим input c названием места
-let popupPlaceUrl = popupCard.querySelector("#link-card"); //находим input c сылкой на картинку
-
-//функция добавления класса попапу добавления карточки
-function openedPopupCard() {
-  popupCard.classList.add("popup_opened");
-};
-
-//функция изъятия класса у попапа добавления карточки
-function closedPopupCard() {
-  popupCard.classList.remove("popup_opened");
-};
-
-function formSubmitHandlerCard(evt) {
-  evt.preventDefault(); //сборс стандартной отправки
-  console.log(popupPlaceName.value);
-  console.log(popupPlaceUrl.value);
-  elements.insertAdjacentHTML('afterBegin', `
-    <div class="element">
-      <img class="element__image" src="${popupPlaceUrl.value}" alt="${popupPlaceName.value}"/>
-      <div class="element__caption-group">
-        <h2 class="element__caption">${popupPlaceName.value}</h2>
-        <button class="element__like" type="button"></button>
-      </div>
-    </div>`);//${input[i].link} указывается массив, его индекс, .данные по ключу
-  closedPopupCard(); //удаляет класс .popup_opened
-}
-
-//слушатель кнопки добавления карточки
-openPopupCard.addEventListener("click", openedPopupCard);
-
-//слушатель по кнопке закрыть попап, что бы собственно попап закрывать
-closePopupCard.addEventListener("click", closedPopupCard);
-
+/*
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме контейнера
-popupCard.addEventListener("click",
+popup.addEventListener(
+  "click",
   function (event) {
     if (event.target === event.currentTarget) {
       //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
-      closedPopupCard();
-    } /*else {
-      openedPopup();
-    }*/
+      closedPopup();
+    } 
   },
   true
 );
-
-formElementCard.addEventListener("submit", formSubmitHandlerCard);
+*/
