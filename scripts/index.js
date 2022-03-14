@@ -1,15 +1,21 @@
 const elements = document.querySelector(".elements"); // находим секцию с карточками
-const elementTemplate = document.querySelector('#element-template').content;
-const popupProfile = document.querySelector('#popup-profile');
-const formProfile = popupProfile.querySelector('#form-profile');
-const closeProfile = popupProfile.querySelector('#profile-closer');
-const authorName = document.querySelector('.profile__name');
-const authorDescription = document.querySelector(".profile__description");
-const profileEditButton = document.querySelector(".profile__edit-button");
-const popupProfileAuthorName = popupProfile.querySelector("#name-profile");
-const popupProfileAuthorDescription = popupProfile.querySelector('#description-profile');
+const elementTemplate = document.querySelector('#element-template').content;// находим заговку разметки
 
-const popupCard = document.querySelector('#popup-card');
+const popupProfile = document.querySelector('#popup-profile');// находим попап профайла
+const formProfile = popupProfile.querySelector('#form-profile');// находим форму в попапе профайла
+const closeProfile = popupProfile.querySelector('#profile-closer');// находим кнопку закрытия попапа профайла
+const authorName = document.querySelector('.profile__name');// находим имя профиля на странице
+const authorDescription = document.querySelector(".profile__description");// находим описание профиля на странице
+const profileEditButton = document.querySelector(".profile__edit-button");// находим кнопку открытия редактирования профиля
+const popupProfileAuthorName = popupProfile.querySelector("#name-profile");// находим инпут для ввода имени профиля
+const popupProfileAuthorDescription = popupProfile.querySelector('#description-profile');// находим инпут для ввода описания профиля
+
+const popupCard = document.querySelector('#popup-card');// находим попап добавления новой карточки
+const formCard = popupCard.querySelector('#form-card');// находим форму попапа добавления новой карточки
+const cardAddButton = document.querySelector('#profile-add-button');// находим на странице кнопку добавления новой карточки
+const closeCard = popupCard.querySelector('#card-closer');// находим кнопку закрытия попапа добавления новой карточки
+const popupCardHeader = popupCard.querySelector('#name-card');// находим инпут ввода заголовка попапа добавления новой карточки
+const popupCardLink = popupCard.querySelector('#link-card');// находим инпут ввода ссылки попапа добавления новой карточки
 
 const likeButton = elements.querySelectorAll('.element__like');
 
@@ -51,20 +57,6 @@ function renderElement(initialMassiveObject) {
 
 };
 
-/*//add cards function
-function addCards(input) {//описываем функцию добавления карточек
-  for (let i = 0; i < input.length; i++) { //перебор массива объектов, затем //мягко, не затрагивая DOM, вставляем новые блоки в секцию elements, вставка происходит всегда после начала
-    elements.insertAdjacentHTML('afterBegin', `
-    <div class="element">
-      <img class="element__image" src="${input[i].link}" alt="${input[i].name}"/>
-      <div class="element__caption-group">
-        <h2 class="element__caption">${input[i].name}</h2>
-        <button class="element__like" type="button"></button>
-      </div>
-    </div>`);//${input[i].link} указывается массив, его индекс, .данные по ключу
-  };
-};*/
-
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
   somePopup.classList.add("popup_opened");
@@ -77,30 +69,41 @@ function closePopup(somePopup) {
 
 function formProfileSubmitHandler(evt) {
   evt.preventDefault(); //сборс стандартной отправки
-  authorName.textContent = popupProfileAuthorName.value; //обратное действие, в текстовое значение объекта записываем тестовое содержимое песевдомассива input
+  authorName.textContent = popupProfileAuthorName.value;
   authorDescription.textContent = popupProfileAuthorDescription.value;
-  closePopup(popupProfile); //удаляет класс .popup_opened
+  closePopup(popupProfile);
 };
 
+function formCardSubmitHandler(evt) {
+  evt.preventDefault();
+  const elementFromTemplate = elementTemplate.querySelector('.element').cloneNode(true);
+  elementFromTemplate.querySelector('.element__image').src = popupCardLink.value;
+  elementFromTemplate.querySelector('.element__image').alt = popupCardHeader.value;
+  elementFromTemplate.querySelector('.element__caption').textContent = popupCardHeader.value;
+  elements.prepend(elementFromTemplate);
+  popupCardHeader.value = '';
+  popupCardLink.value = '';
+  closePopup(popupCard);
+}
+
 // заполняем секцию elements
-//addCards(initialCards);
 renderElement(initialCards);
 
-// слушатель по кнопке редактировать профиль, для того что бы открывать попап пофиля
+// слушатель по кнопкам открыть попап
 profileEditButton.addEventListener("click", function () {
   popupProfileAuthorName.value = authorName.textContent;
   popupProfileAuthorDescription.value = authorDescription.textContent;
-  openPopup(popupProfile); //добавляет класс .popup_opened
+  openPopup(popupProfile);
 });
+cardAddButton.addEventListener('click', () => openPopup(popupCard));
 
-//должно сохранять имя пользователя и описание пользователя в разделе профиль
+//слушатели-обработчики сабмитов
 formProfile.addEventListener("submit", formProfileSubmitHandler);
+formCard.addEventListener('submit', formCardSubmitHandler);
 
 //слушатель по кнопке закрыть попап пофиля, что бы собственно попап закрывать
-//closeProfile.addEventListener("click", closePopup(popupProfile));
-closeProfile.addEventListener('click', function () {
-  closePopup(popupProfile);
-});
+closeProfile.addEventListener('click', () => closePopup(popupProfile));
+closeCard.addEventListener('click', () => closePopup(popupCard));
 
 /*
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме контейнера
