@@ -80,6 +80,9 @@ function formCardSubmitHandler(evt) {
   elementFromTemplate.querySelector('.element__image').src = popupCardLink.value;
   elementFromTemplate.querySelector('.element__image').alt = popupCardHeader.value;
   elementFromTemplate.querySelector('.element__caption').textContent = popupCardHeader.value;
+  elementFromTemplate.querySelector('.element__like').addEventListener('click', function (evt) {
+    console.log('тык');    
+  })
   elements.prepend(elementFromTemplate);
   popupCardHeader.value = '';
   popupCardLink.value = '';

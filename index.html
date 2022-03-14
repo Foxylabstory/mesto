@@ -35,6 +35,7 @@
       <section class="elements" aria-label="секция описывающая места">
         <div class="element">
           <img class="element__image" src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg" alt="река Колумбия"/>
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">река Колумбия</h2>
             <button class="element__like" type="button"></button>
@@ -64,6 +65,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/element/luis-eN1BVNna9hg-unsplash.jpg" alt="Тихий океан"/>
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">Тихий океан</h2>
             <button class="element__like" type="button"></button>
@@ -160,9 +162,19 @@
       </div>
     </div>
 
+    <div class="popup" id="popup-image" aria-label="секция отображающая изображение укрупненно">
+      <figure class="popup__figure">
+        <button class="popup__form-closer popup__form-closer_img" id="image-closer" type="button" aria-label="Закрыть изображение"></button>
+        <img class="popup__figure-img" src="" alt=""/>
+        <figcaption class="popup__figure-caption"></figcaption>
+      </figure>
+      
+    </div>
+
     <template id="element-template">
       <div class="element">
         <img class="element__image" src="" alt=""/>
+        <button class="element__delete"></button>
         <div class="element__caption-group">
           <h2 class="element__caption"></h2>
           <button class="element__like" type="button"></button>

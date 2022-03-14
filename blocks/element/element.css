@@ -4,6 +4,7 @@
   margin: 0;
   max-width: 282px;
   min-height: 361px;
+  position: relative;
 }
 /*
 @media (max-width: 618px) {
