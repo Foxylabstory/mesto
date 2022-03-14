@@ -1,4 +1,5 @@
 const elements = document.querySelector(".elements"); // находим секцию с карточками
+const elementTemplate = document.querySelector('#element-template').content;
 const popupProfile = document.querySelector('#popup-profile');
 const formProfile = popupProfile.querySelector('#form-profile');
 const closeProfile = popupProfile.querySelector('#profile-closer');
@@ -9,6 +10,8 @@ const popupProfileAuthorName = popupProfile.querySelector("#name-profile");
 const popupProfileAuthorDescription = popupProfile.querySelector('#description-profile');
 
 const popupCard = document.querySelector('#popup-card');
+
+const likeButton = elements.querySelectorAll('.element__like');
 
 const initialCards = [
   {
@@ -37,9 +40,18 @@ const initialCards = [
   }
 ];
 
-let likeButton = elements.querySelectorAll('.element__like');
+function renderElement(initialMassiveObject) {
+  for (let i = 0; i < initialMassiveObject.length; i++) {
+    const elementFromTemplate = elementTemplate.querySelector('.element').cloneNode(true);
+    elementFromTemplate.querySelector('.element__image').src = initialMassiveObject[i].link;
+    elementFromTemplate.querySelector('.element__image').alt = initialMassiveObject[i].name;
+    elementFromTemplate.querySelector('.element__caption').textContent = initialMassiveObject[i].name;
+    elements.append(elementFromTemplate);
+  };
 
-//add cards function
+};
+
+/*//add cards function
 function addCards(input) {//описываем функцию добавления карточек
   for (let i = 0; i < input.length; i++) { //перебор массива объектов, затем //мягко, не затрагивая DOM, вставляем новые блоки в секцию elements, вставка происходит всегда после начала
     elements.insertAdjacentHTML('afterBegin', `
@@ -51,7 +63,7 @@ function addCards(input) {//описываем функцию добавлени
       </div>
     </div>`);//${input[i].link} указывается массив, его индекс, .данные по ключу
   };
-};
+};*/
 
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
@@ -71,7 +83,8 @@ function formProfileSubmitHandler(evt) {
 };
 
 // заполняем секцию elements
-addCards(initialCards);
+//addCards(initialCards);
+renderElement(initialCards);
 
 // слушатель по кнопке редактировать профиль, для того что бы открывать попап пофиля
 profileEditButton.addEventListener("click", function () {
