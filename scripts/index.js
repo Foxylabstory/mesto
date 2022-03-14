@@ -26,6 +26,8 @@ const initialCards = [
   }
 ];
 
+let likeButton = elements.querySelectorAll('.element__like');
+
 //add cards function
 function addCards(input) {//описываем функцию добавления карточек
   for (let i = 0; i < input.length; i++) { //перебор массива объектов, затем //мягко, не затрагивая DOM, вставляем новые блоки в секцию elements, вставка происходит всегда после начала
@@ -43,6 +45,9 @@ function addCards(input) {//описываем функцию добавлени
 // заполняем секцию elements
 addCards(initialCards);//вызываем функцию
 
+/*likeButton.addEventListener('click', function () {
+  this.likeButton.classList.toggle('element__like_active');
+});*/
 
 //далее все что касается попапа с профилем пользователя
 
@@ -126,8 +131,6 @@ function closedPopupCard() {
 
 function formSubmitHandlerCard(evt) {
   evt.preventDefault(); //сборс стандартной отправки
-  console.log(popupPlaceName.value);
-  console.log(popupPlaceUrl.value);
   elements.insertAdjacentHTML('afterBegin', `
     <div class="element">
       <img class="element__image" src="${popupPlaceUrl.value}" alt="${popupPlaceName.value}"/>
