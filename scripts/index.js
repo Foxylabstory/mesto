@@ -56,8 +56,6 @@ function renderElement(initialMassiveObject) {
   elementTemplate.querySelector('.element__image').alt = initialMassiveObject.name;
   elementTemplate.querySelector('.element__caption').textContent = initialMassiveObject.name;
   elements.prepend(elementTemplate);
-
-  //elementActionListeners(elementTemplate);
 };
 
 //добавляет класс .popup_opened
@@ -87,6 +85,24 @@ function formCardSubmitHandler(evt) {
   popupCardLink.value = '';
   closePopup(popupCard);
 }
+
+function removeElement(element) {
+  element.remove();
+};
+
+function setLikeElement(element) {
+  const like = element.querySelector('.element__like');
+  like.classList.toggle('element__like_active');
+}
+
+function viewElement(element) {
+  console.log('тык');
+  const elementImg = element.querySelector('.element__image');
+  const elementCaption = element.querySelector('.element__caption');
+  figure.src = elementImg.src
+  figureCaption.textContent = elementCaption.textContent;
+  openPopup(popupImage);
+};
 
 document.body.addEventListener('click', (evt) => {
   
@@ -125,38 +141,16 @@ popupProfile.addEventListener("click", function (event) {
     closePopup(popupProfile);
   } 
 }, true);
-
 popupCard.addEventListener("click", function (event) {
   if (event.target === event.currentTarget) {
-    //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
     closePopup(popupCard);
   } 
 }, true);
-
 popupImage.addEventListener("click", function (event) {
   if (event.target === event.currentTarget) {
-    //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
     closePopup(popupImage);
   } 
 }, true);
-
-function removeElement(element) {
-  element.remove();
-};
-
-function setLikeElement(element) {
-  const like = element.querySelector('.element__like');
-  like.classList.toggle('element__like_active');
-}
-
-function viewElement(element) {
-  console.log('тык');
-  const elementImg = element.querySelector('.element__image');
-  const elementCaption = element.querySelector('.element__caption');
-  figure.src = elementImg.src
-  figureCaption.textContent = elementCaption.textContent;
-  openPopup(popupImage);
-};
 
 // заполняем секцию elements
 initialCards.map(renderElement);
