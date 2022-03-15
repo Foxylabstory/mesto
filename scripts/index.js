@@ -16,7 +16,12 @@ const closeCard = popupCard.querySelector('#card-closer');// находим кн
 const popupCardHeader = popupCard.querySelector('#name-card');// находим инпут ввода заголовка попапа добавления новой карточки
 const popupCardLink = popupCard.querySelector('#link-card');// находим инпут ввода ссылки попапа добавления новой карточки
 
-const likeButton = elements.querySelectorAll('.element__like');
+const popupImage = document.querySelector('#popup-image');
+const closeImage = popupImage.querySelector('#image-closer');
+const figure = popupImage.querySelector('.popup__figure-img');
+const figureCaption = popupImage.querySelector('.popup__figure-caption');
+
+//const likeButton = elements.querySelectorAll('.element__like');
 
 const initialCards = [
   {
@@ -98,7 +103,7 @@ function formCardSubmitHandler(evt) {
 function elementActionListeners(elementTemplate) {
   elementTemplate.querySelector('.element__delete').addEventListener('click', removeElement);
   elementTemplate.querySelector('.element__like').addEventListener('click', setLikeElement);
-  //elementTemplate.querySelector('.element').addEventListener('click', console.log('тык'));
+  elementTemplate.addEventListener('click', viewElement);
 }
 
 function removeElement(evt) {
@@ -111,10 +116,14 @@ function setLikeElement(evt) {
   element.classList.toggle('element__like_active');
 }
 
-/*function viewElement(evt) {
+function viewElement(evt) {
   const element = evt.currentTarget.closest('.element');
-  console.log(element);
-};*/
+  const elementImg = element.querySelector('.element__image');
+  const elementCaption = element.querySelector('.element__caption');
+  figure.src = elementImg.src
+  figureCaption.textContent = elementCaption.textContent;
+  openPopup(popupImage);
+};
 
 // заполняем секцию elements
 initialCards.map(renderElement);
@@ -134,6 +143,7 @@ formCard.addEventListener('submit', formCardSubmitHandler);
 //слушатель по кнопке закрыть попап пофиля, что бы собственно попап закрывать
 closeProfile.addEventListener('click', () => closePopup(popupProfile));
 closeCard.addEventListener('click', () => closePopup(popupCard));
+closeImage.addEventListener('click', () => closePopup(popupImage));
 
 /*
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме контейнера
