@@ -5,6 +5,12 @@
   max-width: 282px;
   min-height: 361px;
   position: relative;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.element:hover {
+  opacity: 0.9;
 }
 /*
 @media (max-width: 618px) {

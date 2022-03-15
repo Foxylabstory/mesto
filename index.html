@@ -25,16 +25,28 @@
         <div class="profile__info">
           <div class="profile__name-block">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" id="profile-edit-button" type="button"></button>
+            <button
+              class="profile__edit-button"
+              id="profile-edit-button"
+              type="button"
+            ></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="profile__add-button" id="profile-add-button" type="button"></button>
+        <button
+          class="profile__add-button"
+          id="profile-add-button"
+          type="button"
+        ></button>
       </section>
 
       <section class="elements" aria-label="секция описывающая места">
-        <div class="element">
-          <img class="element__image" src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg" alt="река Колумбия"/>
+        <!--<div class="element">
+          <img
+            class="element__image"
+            src="./images/element/eric-muhr-ZwyfqMZdpTY-unsplash.jpg"
+            alt="река Колумбия"
+          />
           <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">река Колумбия</h2>
@@ -42,29 +54,47 @@
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/element/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбрус"/>
+          <img
+            class="element__image"
+            src="./images/element/kirill-pershin-1404681-unsplash.png"
+            alt="Гора Эльбрус"
+          />
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">Гора Эльбрус</h2>
             <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/element/kirill-pershin-1556355-unsplash.png" alt="горы Домбая"
+          <img
+            class="element__image"
+            src="./images/element/kirill-pershin-1556355-unsplash.png"
+            alt="горы Домбая"
           />
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">Домбай</h2>
             <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/element/woody-kelly-54ruWGh625k-unsplash.jpg" alt="Где то на рассвете"/>
+          <img
+            class="element__image"
+            src="./images/element/woody-kelly-54ruWGh625k-unsplash.jpg"
+            alt="Где то на рассвете"
+          />
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">На рассвете в горах</h2>
             <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/element/luis-eN1BVNna9hg-unsplash.jpg" alt="Тихий океан"/>
+          <img
+            class="element__image"
+            src="./images/element/luis-eN1BVNna9hg-unsplash.jpg"
+            alt="Тихий океан"
+          />
           <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">Тихий океан</h2>
@@ -72,24 +102,39 @@
           </div>
         </div>
         <div class="element">
-          <img class="element__image" src="./images/element/kirill-pershin-1088404-unsplash.png" alt="замок в Карачаево-Черкессии"/>
+          <img
+            class="element__image"
+            src="./images/element/kirill-pershin-1088404-unsplash.png"
+            alt="замок в Карачаево-Черкессии"
+          />
+          <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption">Карачаево-Черкесск</h2>
             <button class="element__like" type="button"></button>
           </div>
-        </div>
-        
+        </div>-->
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2022. Foxylab</p>
     </footer>
-    <div class="popup" id="popup-profile" aria-label="секция описывающая попап редактирования профиля">
+    <div
+      class="popup"
+      id="popup-profile"
+      aria-label="секция описывающая попап редактирования профиля"
+    >
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="popup__form" id="form-profile" name="popup-form" autocomplete="on">
+        <form
+          class="popup__form"
+          id="form-profile"
+          name="popup-form"
+          autocomplete="on"
+        >
           <fieldset class="popup__fieldset">
-            <label class="popup__hidden-label" for="name-profile">Ваше имя</label>
+            <label class="popup__hidden-label" for="name-profile"
+              >Ваше имя</label
+            >
             <input
               class="popup__input"
               id="name-profile"
@@ -125,10 +170,19 @@
       </div>
     </div>
 
-    <div class="popup" id="popup-card" aria-label="секция описывающая попап добавления карточки">
+    <div
+      class="popup"
+      id="popup-card"
+      aria-label="секция описывающая попап добавления карточки"
+    >
       <div class="popup__container">
         <h2 class="popup__header">Новое место</h2>
-        <form class="popup__form" id="form-card" name="popup-form" autocomplete="on">
+        <form
+          class="popup__form"
+          id="form-card"
+          name="popup-form"
+          autocomplete="on"
+        >
           <fieldset class="popup__fieldset">
             <label class="popup__hidden-label" for="name-card">Название</label>
             <input
@@ -141,7 +195,9 @@
               minlength="2"
               placeholder="Название"
             />
-            <label class="popup__hidden-label" for="link-card">Ссылка на картинку</label>
+            <label class="popup__hidden-label" for="link-card"
+              >Ссылка на картинку</label
+            >
             <input
               class="popup__input"
               id="link-card"
@@ -162,17 +218,26 @@
       </div>
     </div>
 
-    <div class="popup" id="popup-image" aria-label="секция отображающая изображение укрупненно">
+    <div
+      class="popup"
+      id="popup-image"
+      aria-label="секция отображающая изображение укрупненно"
+    >
       <figure class="popup__figure">
-        <button class="popup__form-closer popup__form-closer_img" id="image-closer" type="button" aria-label="Закрыть изображение"></button>
-        <img class="popup__figure-img" src="" alt=""/>
+        <button
+          class="popup__form-closer popup__form-closer_img"
+          id="image-closer"
+          type="button"
+          aria-label="Закрыть изображение"
+        ></button>
+        <img class="popup__figure-img" src="" alt="" />
         <figcaption class="popup__figure-caption"></figcaption>
       </figure>
     </div>
 
     <template class="element" id="element-template">
       <div class="element">
-        <img class="element__image" src="" alt=""/>
+        <img class="element__image" src="" alt="" />
         <button class="element__delete"></button>
         <div class="element__caption-group">
           <h2 class="element__caption"></h2>
