@@ -115,9 +115,9 @@ function viewElement(evt) {
   figure.src = elementImg.src;
   figure.alt = elementCaption.textContent;
   figureCaption.textContent = elementCaption.textContent;
-  openPopup(popupImage);
+  //openPopup(popupImage);
   /* в реализации ниже был смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, 
-  и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, хотелось большей красоты
+  и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, хотелось большей красоты*/
   if (evt.target.classList.contains("element__image")) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__caption-group")) {
@@ -126,7 +126,7 @@ function viewElement(evt) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__ordering")) {
     openPopup(popupImage);
-  }*/
+  }
 }
 /*Я пожалуй оставлю зарисовочку в коде. Спасибо.
 document.body.addEventListener("click", (evt) => {
