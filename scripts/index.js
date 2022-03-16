@@ -115,6 +115,8 @@ function viewElement(evt) {
   figure.src = elementImg.src;
   figure.alt = elementCaption.textContent;
   figureCaption.textContent = elementCaption.textContent;
+  openPopup(popupImage);
+  /* в реализации ниже был смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, и при нажатии на корзинку
   if (evt.target.classList.contains("element__image")) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__caption-group")) {
@@ -123,12 +125,9 @@ function viewElement(evt) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__ordering")) {
     openPopup(popupImage);
-  }
+  }*/
 }
-/*Здравствуйте. с комментарием который относится к слушателю по всему документу я не совсем согласен. В вебинаре по лайвкодингу, 
-Ян Савицкий как раз нам говорил что устанавливать слушатели в createCard может быть чревато, по тем причинам, 
-что когда на странице будет 1000 элементов, они с созданием карточки будут создаваться и создаваться, соответственно для тысячи картинок будет 3000 слушателей
-как поступать в таком случае? писать всех отдельных слушателей? кого нам слушать (в смысле у кого учиться)? ревьюверов или наставников?
+/*Я пожалуй оставлю зарисовочку в коде. Спасибо.
 document.body.addEventListener("click", (evt) => {
   const element = evt.target.closest(".element");
   if (evt.target.classList.contains("element__delete")) {
@@ -150,10 +149,10 @@ document.body.addEventListener("click", (evt) => {
 function setElementListeners(element) {
   element.querySelector(".element__delete").addEventListener("click", removeElement);
   element.querySelector(".element__like").addEventListener("click", setLikeElement);
-  //element.querySelector(".element__image").addEventListener("click", viewElement);
+  element.querySelector(".element__image").addEventListener("click", viewElement);
   //element.querySelector(".element__caption-group").addEventListener("click", viewElement);
   //element.querySelector(".element__caption").addEventListener("click", viewElement);
-  element.querySelector(".element__ordering").addEventListener("click", viewElement);
+  //element.querySelector(".element__ordering").addEventListener("click", viewElement);
 }
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
