@@ -150,10 +150,10 @@ document.body.addEventListener("click", (evt) => {
 function setElementListeners(element) {
   element.querySelector(".element__delete").addEventListener("click", removeElement);
   element.querySelector(".element__like").addEventListener("click", setLikeElement);
-  element.querySelector(".element__image").addEventListener("click", viewElement);
+  //element.querySelector(".element__image").addEventListener("click", viewElement);
   //element.querySelector(".element__caption-group").addEventListener("click", viewElement);
   //element.querySelector(".element__caption").addEventListener("click", viewElement);
-  //element.querySelector(".element__ordering").addEventListener("click", viewElement);
+  element.querySelector(".element__ordering").addEventListener("click", viewElement);
 }
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
