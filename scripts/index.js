@@ -7,7 +7,9 @@ const authorName = document.querySelector(".profile__name"); // находим �
 const authorDescription = document.querySelector(".profile__description"); // находим описание профиля на странице
 const profileEditButton = document.querySelector(".profile__edit-button"); // находим кнопку открытия редактирования профиля
 const popupProfileAuthorName = popupProfile.querySelector("#name-profile"); // находим инпут для ввода имени профиля
-const popupProfileAuthorDescription = popupProfile.querySelector("#description-profile"); // находим инпут для ввода описания профиля
+const popupProfileAuthorDescription = popupProfile.querySelector(
+  "#description-profile"
+); // находим инпут для ввода описания профиля
 
 const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
 const formCard = popupCard.querySelector("#form-card"); // находим форму попапа добавления новой карточки
@@ -148,12 +150,18 @@ document.body.addEventListener("click", (evt) => {
 */
 //функция по установке слушателей для элементов карточки
 function setElementListeners(element) {
-  element.querySelector(".element__delete").addEventListener("click", removeElement);
-  element.querySelector(".element__like").addEventListener("click", setLikeElement);
+  element
+    .querySelector(".element__delete")
+    .addEventListener("click", removeElement);
+  element
+    .querySelector(".element__like")
+    .addEventListener("click", setLikeElement);
   //element.querySelector(".element__image").addEventListener("click", viewElement);
   //element.querySelector(".element__caption-group").addEventListener("click", viewElement);
   //element.querySelector(".element__caption").addEventListener("click", viewElement);
-  element.querySelector(".element__ordering").addEventListener("click", viewElement);
+  element
+    .querySelector(".element__ordering")
+    .addEventListener("click", viewElement);
 }
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
@@ -189,9 +197,9 @@ formProfile.addEventListener("submit", formProfileSubmitHandler);
 formCard.addEventListener("submit", formCardSubmitHandler);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
-popupProfile.addEventListener('mousedown', closeByOverlayClick);
-popupCard.addEventListener('mousedown', closeByOverlayClick);
-popupImage.addEventListener('mousedown', closeByOverlayClick);
+popupProfile.addEventListener("mousedown", closeByOverlayClick);
+popupCard.addEventListener("mousedown", closeByOverlayClick);
+popupImage.addEventListener("mousedown", closeByOverlayClick);
 
 // заполняем секцию elements
 initialCards.forEach(function (card) {
