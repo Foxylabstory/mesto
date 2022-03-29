@@ -54,10 +54,10 @@
           <fieldset class="popup__fieldset">
             <label class="popup__hidden-label" for="name-profile">Ваше имя</label>
             <input class="popup__input" id="name-profile" name="popupInputName" type="text" required maxlength="40" minlength="2" placeholder="Введите ваше имя"/>
-            <span class="popup__span-error"></span>
+            <span class="popup__span-error"> </span>
             <label class="popup__hidden-label" for="description-profile">О себе</label>
             <input class="popup__input" id="description-profile" name="popupInputDescription" type="text" required maxlength="200" minlength="2" placeholder="Расскажите о себе"/>
-            <span class="popup__span-error"></span>
+            <span class="popup__span-error"> </span>
             <button class="popup__button" type="submit">Сохранить</button>
           </fieldset>
         </form>
@@ -72,10 +72,10 @@
           <fieldset class="popup__fieldset">
             <label class="popup__hidden-label" for="name-card">Название</label>
             <input class="popup__input" id="name-card" name="popupInputCard" type="text" required maxlength="30" minlength="1" placeholder="Название"/>
-            <span class="popup__span-error"></span>
+            <span class="popup__span-error"> </span>
             <label class="popup__hidden-label" for="link-card">Ссылка на картинку</label>
             <input class="popup__input" id="link-card" name="popupInputLink" type="url" required placeholder="Ссылка на картинку"/>
-            <span class="popup__span-error"></span>
+            <span class="popup__span-error"> </span>
             <button class="popup__button" type="submit">Создать</button>
           </fieldset>
         </form>
@@ -105,5 +105,6 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
