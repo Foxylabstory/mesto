@@ -11,44 +11,18 @@ const profileAuthorDescription = profileForm.elements.popupInputDescription;// �
 
 const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
 const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
-const popupCardHeader = cardForm.elements.popupInputCard;
-const popupCardLink = cardForm.elements.popupInputLink;
+const popupInputCardHeader = cardForm.elements.popupInputCard;
+const popupInputCardLink = cardForm.elements.popupInputLink;
 const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
 const closeCard = popupCard.querySelector("#card-closer"); // находим кнопку закрытия попапа добавления новой карточки
-//const popupCardHeader = popupCard.querySelector("#name-card"); // находим инпут ввода заголовка попапа добавления новой карточки
-//const popupCardLink = popupCard.querySelector("#link-card"); // находим инпут ввода ссылки попапа добавления новой карточки
+//const popupInputCardHeader = popupCard.querySelector("#name-card"); // находим инпут ввода заголовка попапа добавления новой карточки
+//const popupInputCardLink = popupCard.querySelector("#link-card"); // находим инпут ввода ссылки попапа добавления новой карточки
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
 const figure = popupImage.querySelector(".popup__figure-img");
 const figureCaption = popupImage.querySelector(".popup__figure-caption");
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 //создает карточку
 function createCard(initialMassiveObject) {
   const elementCard = document
@@ -90,8 +64,8 @@ function profileFormSubmitHandler(evt) {
 function formCardSubmitHandler(evt) {
   evt.preventDefault();
   const newCard = {};
-  newCard.name = popupCardHeader.value;
-  newCard.link = popupCardLink.value;
+  newCard.name = popupInputCardHeader.value;
+  newCard.link = popupInputCardLink.value;
   const createdNewCard = createCard(newCard);
   renderCard(createdNewCard, elements);
   cardForm.reset();
@@ -117,8 +91,8 @@ function viewElement(evt) {
   figure.alt = elementCaption.textContent;
   figureCaption.textContent = elementCaption.textContent;
   //openPopup(popupImage);
-  /* в реализации ниже был смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, 
-  и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, хотелось большей красоты*/
+  /* в реализации ниже смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, 
+  и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, еще не разобрался как работет всплытие*/
   if (evt.target.classList.contains("element__image")) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__caption-group")) {
