@@ -1,27 +1,13 @@
-//const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
-
 function enableValidation() {
-    //profileForm.addEventListener("submit", handlerProfileFormSubmit);
-    cardForm.addEventListener("input", handleCardFormInput);
-    
-    profileForm.addEventListener("input", handleCardFormInput);
+    cardForm.addEventListener("input", handleFormInput);
+    profileForm.addEventListener("input", handleFormInput);
 }
 
-function handleCardFormInput(evt) {
+function handleFormInput(evt) {
     const form = evt.currentTarget;
     const input = evt.target;
-
-    //setCustomError(input);
     setSpanError(input);
     setSubmitButtonStatement(form);
-}
-
-function setCustomError(input) {
-    const validity = input.validity;
-    input.setCustomValidity('');
-    if (!validity) {
-        input.setCustomValidity('There is problem');
-    };
 }
 
 function setSpanError(input) {
@@ -42,23 +28,3 @@ function setSubmitButtonStatement(form) {
 }
 
 enableValidation();
-
-
-/*function showInputError(element) {
-    element.classList.add('popup__input_type_error');
-}
-
-function hideInputError(element) {
-    element.classList.remove('popup__input_type_error');
-}
-
-function isValid() {
-    if (!popupInputCardLink.validity.valid) {
-        showInputError(popupInputCardLink);
-    } else {
-        hideInputError(popupInputCardLink);
-    };
-};
-
-popupInputCardLink.addEventListener('input', isValid);
-*/
