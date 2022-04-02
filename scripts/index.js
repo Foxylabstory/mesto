@@ -15,8 +15,6 @@ const popupInputCardHeader = cardForm.elements.popupInputCard;
 const popupInputCardLink = cardForm.elements.popupInputLink;
 const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
 const closeCard = popupCard.querySelector("#card-closer"); // находим кнопку закрытия попапа добавления новой карточки
-//const popupInputCardHeader = popupCard.querySelector("#name-card"); // находим инпут ввода заголовка попапа добавления новой карточки
-//const popupInputCardLink = popupCard.querySelector("#link-card"); // находим инпут ввода ссылки попапа добавления новой карточки
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
@@ -43,8 +41,7 @@ function renderCard(card, container) {
 }
 
 //добавляет класс .popup_opened
-//когда перевешиваю слушатель на попап когд перестает работать
-//
+//когда перевешиваю слушатель на попап код перестает работать, что делать?
 function openPopup(somePopup) {
   document.addEventListener("keydown", closeByPressEsc);//somePopup.addEventListener("keydown", closeByPressEsc);
   somePopup.classList.add("popup_opened");
@@ -95,36 +92,7 @@ function viewElement(evt) {
   figure.alt = elementCaption.textContent;
   figureCaption.textContent = elementCaption.textContent;
   openPopup(popupImage);
-  /* в реализации ниже смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, 
-  и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, еще не разобрался как работет всплытие*/
-  /*if (evt.target.classList.contains("element__image")) {
-    openPopup(popupImage);
-  } else if (evt.target.classList.contains("element__caption-group")) {
-    openPopup(popupImage);
-  } else if (evt.target.classList.contains("element__caption")) {
-    openPopup(popupImage);
-  } else if (evt.target.classList.contains("element__ordering")) {
-    openPopup(popupImage);
-  }*/
 }
-/*Я пожалуй оставлю зарисовочку в коде. Спасибо.
-document.body.addEventListener("click", (evt) => {
-  const element = evt.target.closest(".element");
-  if (evt.target.classList.contains("element__delete")) {
-    removeElement(element);
-  } else if (evt.target.classList.contains("element__like")) {
-    setLikeElement(element);
-  } else if (evt.target.classList.contains("element__image")) {
-    viewElement(element);
-  } else if (evt.target.classList.contains("element__caption-group")) {
-    viewElement(element);
-  } else if (evt.target.classList.contains("element__caption")) {
-    viewElement(element);
-  } else if (evt.target.classList.contains("element")) {
-    viewElement(element);
-  }
-});
-*/
 //функция по установке слушателей для элементов карточки
 function setElementListeners(element) {
   element
@@ -134,9 +102,6 @@ function setElementListeners(element) {
     .querySelector(".element__like")
     .addEventListener("click", setLikeElement);
   element.querySelector(".element__image").addEventListener("click", viewElement);
-  //element.querySelector(".element__caption-group").addEventListener("click", viewElement);
-  //element.querySelector(".element__caption").addEventListener("click", viewElement);
-  //element.querySelector(".element__ordering").addEventListener("click", viewElement);
 }
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
