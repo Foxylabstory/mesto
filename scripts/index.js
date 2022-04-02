@@ -5,9 +5,9 @@ const closeProfile = popupProfile.querySelector("#profile-closer"); // нахо�
 const authorName = document.querySelector(".profile__name"); // находим имя профиля на странице
 const authorDescription = document.querySelector(".profile__description"); // находим описание профиля на странице
 const profileEditButton = document.querySelector(".profile__edit-button"); // находим кнопку открытия редактирования профиля
-const profileForm = document.forms.popupFormProfile;// находим форму в попапе профайла
-const profileAuthorName = profileForm.elements.popupInputName;// находим инпут для ввода имени профиля
-const profileAuthorDescription = profileForm.elements.popupInputDescription;// находим инпут для ввода описания профиля
+const profileForm = document.forms.popupFormProfile; // находим форму в попапе профайла
+const profileAuthorName = profileForm.elements.popupInputName; // находим инпут для ввода имени профиля
+const profileAuthorDescription = profileForm.elements.popupInputDescription; // находим инпут для ввода описания профиля
 
 const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
 const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
@@ -144,6 +144,13 @@ function closeByOverlayClick(evt) {
   }
 }
 
+function closeByPressEsc(evt) {
+  if (evt.key === "Escape" && document.querySelector(".popup_opened")) {
+    const popup = document.querySelector(".popup_opened");
+    closePopup(popup);
+  }
+}
+
 //слушатели на открытие
 profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
@@ -161,9 +168,12 @@ closeProfile.addEventListener("click", function () {
 closeCard.addEventListener("click", function () {
   closePopup(popupCard);
 });
+
 closeImage.addEventListener("click", function () {
   closePopup(popupImage);
 });
+
+document.addEventListener("keydown", closeByPressEsc);
 
 //слушатели-обработчики сабмитов
 profileForm.addEventListener("submit", profileFormSubmitHandler);
