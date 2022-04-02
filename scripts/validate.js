@@ -7,15 +7,14 @@ const obj = {
   inactiveButtonClass: "popup__button_type_disable",
 };
 
-function setSubmitButtonStatement(form) {
-  const button = form.querySelector(".popup__button");
+function setSubmitButtonStatement(form, button, {inactiveButtonClass, ...rest}) {
   const isValid = form.checkValidity();
   if (!isValid) {
-    button.classList.add("popup__button_type_disable");
-    button.setAttribute("disabled", "true");
+    button.classList.add(inactiveButtonClass);
+    button.disabled = true;
   } else {
-    button.classList.remove("popup__button_type_disable");
-    button.removeAttribute("disabled");
+    button.classList.remove(inactiveButtonClass);
+    button.disabled = false;
   }
 }
 
@@ -24,27 +23,28 @@ function setRemoveSpanError(input) {
   span.textContent = input.validationMessage;
 }
 
-function isValid(form, input) {
+function isValid(form, input, button, rest) {
   //**проверка валидности */
   if (input.validity.valid) {
     //**скрыть ошибку */
     setRemoveSpanError(input);
     //**валидация кнопки */
-    setSubmitButtonStatement(form);
+    setSubmitButtonStatement(form, button, rest);
   } else {
     //**показать ошибку */
     setRemoveSpanError(input);
     //**валидация кнопки */
-    setSubmitButtonStatement(form);
+    setSubmitButtonStatement(form, button, rest);
   }
 }
 
-function setInputListeners(form, inputSelector) {
+function setInputListeners(form, inputSelector, {submitButtonSelector, ...rest}) {
   //**наложение обработчиков*/
   const inputs = Array.from(form.querySelectorAll(inputSelector));
+  const button = form.querySelector(submitButtonSelector);
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
-      isValid(form, input);
+      isValid(form, input, button, rest);
     });
   });
 }
@@ -53,7 +53,7 @@ function enableValidation({ formSelector, inputSelector, ...rest }) {
   // *запуск валидации */
   const forms = Array.from(document.querySelectorAll(formSelector));
   forms.forEach((form) => {
-    setInputListeners(form, inputSelector);
+    setInputListeners(form, inputSelector, rest);
   });
 }
 

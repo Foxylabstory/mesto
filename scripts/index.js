@@ -43,17 +43,21 @@ function renderCard(card, container) {
 }
 
 //добавляет класс .popup_opened
+//когда перевешиваю слушатель на попап когд перестает работать
+//
 function openPopup(somePopup) {
+  document.addEventListener("keydown", closeByPressEsc);//somePopup.addEventListener("keydown", closeByPressEsc);
   somePopup.classList.add("popup_opened");
 }
 
 //убирает класс .popup_opened
 function closePopup(somePopup) {
+  document.removeEventListener("keydown", closeByPressEsc);//somePopup.removeEventListener("keydown", closeByPressEsc);
   somePopup.classList.remove("popup_opened");
 }
 
 //обрабатывает событие по нажатию на кнопку сохранить
-function profileFormSubmitHandler(evt) {
+function setProfileFormViaSubmit(evt) {
   evt.preventDefault(); //сборс стандартной отправки
   authorName.textContent = profileAuthorName.value;
   authorDescription.textContent = profileAuthorDescription.value;
@@ -61,7 +65,7 @@ function profileFormSubmitHandler(evt) {
 }
 
 //обрабатывает событие по нажатию на кнопку сохранить
-function formCardSubmitHandler(evt) {
+function setCardFormViaSubmit(evt) {
   evt.preventDefault();
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
@@ -90,10 +94,10 @@ function viewElement(evt) {
   figure.src = elementImg.src;
   figure.alt = elementCaption.textContent;
   figureCaption.textContent = elementCaption.textContent;
-  //openPopup(popupImage);
+  openPopup(popupImage);
   /* в реализации ниже смысл, что бы проверять место нажатия на карточку, без блока if/else попап открывается и при нажатии на сердечко, 
   и при нажатии на корзинку, а так попап открывается только по нажатию на картинку, еще не разобрался как работет всплытие*/
-  if (evt.target.classList.contains("element__image")) {
+  /*if (evt.target.classList.contains("element__image")) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__caption-group")) {
     openPopup(popupImage);
@@ -101,7 +105,7 @@ function viewElement(evt) {
     openPopup(popupImage);
   } else if (evt.target.classList.contains("element__ordering")) {
     openPopup(popupImage);
-  }
+  }*/
 }
 /*Я пожалуй оставлю зарисовочку в коде. Спасибо.
 document.body.addEventListener("click", (evt) => {
@@ -129,23 +133,21 @@ function setElementListeners(element) {
   element
     .querySelector(".element__like")
     .addEventListener("click", setLikeElement);
-  //element.querySelector(".element__image").addEventListener("click", viewElement);
+  element.querySelector(".element__image").addEventListener("click", viewElement);
   //element.querySelector(".element__caption-group").addEventListener("click", viewElement);
   //element.querySelector(".element__caption").addEventListener("click", viewElement);
-  element
-    .querySelector(".element__ordering")
-    .addEventListener("click", viewElement);
+  //element.querySelector(".element__ordering").addEventListener("click", viewElement);
 }
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
   const closestPopup = evt.target.closest(".popup");
-  if (evt.target === evt.currentTarget) {
+  if (evt.target === closestPopup) {
     closePopup(closestPopup);
   }
 }
 
 function closeByPressEsc(evt) {
-  if (evt.key === "Escape" && document.querySelector(".popup_opened")) {
+  if (evt.key === "Escape") {//&& document.querySelector(".popup_opened")
     const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
@@ -173,16 +175,14 @@ closeImage.addEventListener("click", function () {
   closePopup(popupImage);
 });
 
-document.addEventListener("keydown", closeByPressEsc);
+//document.addEventListener("keydown", closeByPressEsc);
 
 //слушатели-обработчики сабмитов
-profileForm.addEventListener("submit", profileFormSubmitHandler);
-cardForm.addEventListener("submit", formCardSubmitHandler);
+profileForm.addEventListener("submit", setProfileFormViaSubmit);
+cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
-popupProfile.addEventListener("mousedown", closeByOverlayClick);
-popupCard.addEventListener("mousedown", closeByOverlayClick);
-popupImage.addEventListener("mousedown", closeByOverlayClick);
+document.addEventListener("mousedown", closeByOverlayClick);
 
 // заполняем секцию elements
 initialCards.forEach(function (card) {
