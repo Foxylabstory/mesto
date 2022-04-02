@@ -41,15 +41,14 @@ function renderCard(card, container) {
 }
 
 //добавляет класс .popup_opened
-//когда перевешиваю слушатель на попап код перестает работать, что делать?
 function openPopup(somePopup) {
-  document.addEventListener("keydown", closeByPressEsc);//somePopup.addEventListener("keydown", closeByPressEsc);
+  document.addEventListener("keydown", closeByPressEsc);
   somePopup.classList.add("popup_opened");
 }
 
 //убирает класс .popup_opened
 function closePopup(somePopup) {
-  document.removeEventListener("keydown", closeByPressEsc);//somePopup.removeEventListener("keydown", closeByPressEsc);
+  document.removeEventListener("keydown", closeByPressEsc);
   somePopup.classList.remove("popup_opened");
 }
 
