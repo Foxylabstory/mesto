@@ -8,6 +8,7 @@ const profileEditButton = document.querySelector(".profile__edit-button"); // н
 const profileForm = document.forms.popupFormProfile; // находим форму в попапе профайла
 const profileAuthorName = profileForm.elements.popupInputName; // находим инпут для ввода имени профиля
 const profileAuthorDescription = profileForm.elements.popupInputDescription; // находим инпут для ввода описания профиля
+const submitButtonEditProfile = popupProfile.querySelector('.popup__button');
 
 const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
 const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
@@ -15,11 +16,32 @@ const popupInputCardHeader = cardForm.elements.popupInputCard;
 const popupInputCardLink = cardForm.elements.popupInputLink;
 const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
 const closeCard = popupCard.querySelector("#card-closer"); // находим кнопку закрытия попапа добавления новой карточки
+const submitButtonAddCard = popupCard.querySelector('.popup__button');
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
 const figure = popupImage.querySelector(".popup__figure-img");
 const figureCaption = popupImage.querySelector(".popup__figure-caption");
+
+//Сброс ошибок в инпутах
+function resetErrorInputStatement() {
+  const inputsSpanErrorList = document.querySelectorAll('.popup__input-error');
+  inputsSpanErrorList.forEach((item) => {
+    item.textContent = '';
+  });
+}
+
+//Сброс состояния кнопки редактирования профиля при недовводе данных и закрытии
+function resetSubmitButtonStatementForEditProfile() {
+  submitButtonEditProfile.classList.remove('popup__button_type_disable');
+  submitButtonEditProfile.disabled = false;
+}
+
+//Сброс состояния кнопки после добавления карточки
+function resetSubmitButtonStatementForAddCard() {
+  submitButtonAddCard.classList.add('popup__button_type_disable');
+  submitButtonAddCard.disabled = true;
+}
 
 //создает карточку
 function createCard(initialMassiveObject) {
@@ -69,6 +91,7 @@ function setCardFormViaSubmit(evt) {
   const createdNewCard = createCard(newCard);
   renderCard(createdNewCard, elements);
   cardForm.reset();
+  resetSubmitButtonStatementForAddCard();
   closePopup(popupCard);
 }
 
@@ -121,6 +144,8 @@ function closeByPressEsc(evt) {
 profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
+  resetErrorInputStatement();
+  resetSubmitButtonStatementForEditProfile()
   openPopup(popupProfile);
 });
 cardAddButton.addEventListener("click", function () {
