@@ -53,9 +53,7 @@ function renderCard(card, container) {
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
   document.addEventListener("keydown", closeByPressEsc);
-  const form = somePopup.querySelector('.popup__form');
-  const button = form.querySelector('.popup__button');
-  setSubmitButtonStatement(form, button);// !! обращается к функции в файле validate.js
+  
   somePopup.classList.add("popup_opened");
 }
 
@@ -135,9 +133,11 @@ profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
   resetErrorInputStatement();
+  setSubmitButtonStatement(profileForm, submitButtonEditProfile);// !! обращается к функции в файле validate.js
   openPopup(popupProfile);
 });
 cardAddButton.addEventListener("click", function () {
+  setSubmitButtonStatement(cardForm, submitButtonAddCard);// !! обращается к функции в файле validate.js
   openPopup(popupCard);
 });
 
