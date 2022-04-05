@@ -31,18 +31,6 @@ function resetErrorInputStatement() {
   });
 }
 
-//Сброс состояния кнопки редактирования профиля при недовводе данных и закрытии
-function resetSubmitButtonStatementForEditProfile() {
-  submitButtonEditProfile.classList.remove('popup__button_type_disable');
-  submitButtonEditProfile.disabled = false;
-}
-
-//Сброс состояния кнопки после добавления карточки
-function resetSubmitButtonStatementForAddCard() {
-  submitButtonAddCard.classList.add('popup__button_type_disable');
-  submitButtonAddCard.disabled = true;
-}
-
 //создает карточку
 function createCard(initialMassiveObject) {
   const elementCard = document
@@ -65,6 +53,9 @@ function renderCard(card, container) {
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
   document.addEventListener("keydown", closeByPressEsc);
+  const form = somePopup.querySelector('.popup__form');
+  const button = form.querySelector('.popup__button');
+  setSubmitButtonStatement(form, button);// !! обращается к функции в файле validate.js
   somePopup.classList.add("popup_opened");
 }
 
@@ -91,7 +82,6 @@ function setCardFormViaSubmit(evt) {
   const createdNewCard = createCard(newCard);
   renderCard(createdNewCard, elements);
   cardForm.reset();
-  resetSubmitButtonStatementForAddCard();
   closePopup(popupCard);
 }
 
@@ -145,7 +135,6 @@ profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
   resetErrorInputStatement();
-  resetSubmitButtonStatementForEditProfile()
   openPopup(popupProfile);
 });
 cardAddButton.addEventListener("click", function () {

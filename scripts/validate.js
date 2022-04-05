@@ -7,8 +7,9 @@ const obj = {
   inactiveButtonClass: "popup__button_type_disable",
 };
 
-function setSubmitButtonStatement(form, button, {inactiveButtonClass, ...rest}) {
+function setSubmitButtonStatement(form, button) {
   const isValid = form.checkValidity();
+  const inactiveButtonClass = obj.inactiveButtonClass;
   if (!isValid) {
     button.classList.add(inactiveButtonClass);
     button.disabled = true;
@@ -29,12 +30,12 @@ function isValid(form, input, button, rest) {
     //**скрыть ошибку */
     setRemoveSpanError(input);
     //**валидация кнопки */
-    setSubmitButtonStatement(form, button, rest);
+    setSubmitButtonStatement(form, button);
   } else {
     //**показать ошибку */
     setRemoveSpanError(input);
     //**валидация кнопки */
-    setSubmitButtonStatement(form, button, rest);
+    setSubmitButtonStatement(form, button);
   }
 }
 
