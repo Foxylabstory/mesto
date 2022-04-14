@@ -7,40 +7,88 @@ const obj = {
   inactiveButtonClass: "popup__button_type_disable",
 };
 
-function setSubmitButtonStatement(form, button) {
-  const isValid = form.checkValidity();
-  const inactiveButtonClass = obj.inactiveButtonClass;
-  if (!isValid) {
-    button.classList.add(inactiveButtonClass);
-    button.disabled = true;
-  } else {
-    button.classList.remove(inactiveButtonClass);
-    button.disabled = false;
+class FormValidator {
+  constructor(data, form) {
+    this._data = data;
+    this.form = document.querySelector(form);
   }
+  
+  _setSubmitButtonStatement(form, button) {
+    const isValid = form.checkValidity();
+    const inactiveButtonClass = obj.inactiveButtonClass;
+    if (!isValid) {
+      button.classList.add(inactiveButtonClass);
+      button.disabled = true;
+    } else {
+      button.classList.remove(inactiveButtonClass);
+      button.disabled = false;
+    }
+  }
+
+  _setRemoveSpanError(input) {
+    const span = document.querySelector(`#${input.id}-error`);
+    span.textContent = input.validationMessage;
+  }
+  
+  _isValid(form, input, button, rest) {
+    //**проверка валидности
+    if (input.validity.valid) {
+      //**скрыть ошибку
+      setRemoveSpanError(input);
+      //**валидация кнопки
+      setSubmitButtonStatement(form, button);
+    } else {
+      //**показать ошибку
+      setRemoveSpanError(input);
+      //**валидация кнопки
+      setSubmitButtonStatement(form, button);
+    }
+  }
+  
+  _setInputListeners(form, inputSelector, { submitButtonSelector, ...rest }) {
+    //**наложение обработчиков
+    const inputs = Array.from(form.querySelectorAll(inputSelector));
+    const button = form.querySelector(submitButtonSelector);
+    inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        isValid(form, input, button, rest);
+      });
+    });
+  }
+  
+  enableValidation({ formSelector, inputSelector, ...rest }) {
+    // *запуск валидации
+    const forms = Array.from(document.querySelectorAll(formSelector));
+    forms.forEach((form) => {
+      setInputListeners(form, inputSelector, rest);
+    });
+  }
+
 }
 
+/*
 function setRemoveSpanError(input) {
   const span = document.querySelector(`#${input.id}-error`);
   span.textContent = input.validationMessage;
 }
 
 function isValid(form, input, button, rest) {
-  //**проверка валидности */
+  //проверка валидности
   if (input.validity.valid) {
-    //**скрыть ошибку */
+    //скрыть ошибку
     setRemoveSpanError(input);
-    //**валидация кнопки */
+    //**валидация кнопки
     setSubmitButtonStatement(form, button);
   } else {
-    //**показать ошибку */
+    //**показать ошибку
     setRemoveSpanError(input);
-    //**валидация кнопки */
+    //**валидация кнопки
     setSubmitButtonStatement(form, button);
   }
 }
 
-function setInputListeners(form, inputSelector, {submitButtonSelector, ...rest}) {
-  //**наложение обработчиков*/
+function setInputListeners(form, inputSelector, { submitButtonSelector, ...rest }) {
+  //**наложение обработчиков
   const inputs = Array.from(form.querySelectorAll(inputSelector));
   const button = form.querySelector(submitButtonSelector);
   inputs.forEach((input) => {
@@ -51,7 +99,7 @@ function setInputListeners(form, inputSelector, {submitButtonSelector, ...rest})
 }
 
 function enableValidation({ formSelector, inputSelector, ...rest }) {
-  // *запуск валидации */
+  // *запуск валидации
   const forms = Array.from(document.querySelectorAll(formSelector));
   forms.forEach((form) => {
     setInputListeners(form, inputSelector, rest);
@@ -59,3 +107,5 @@ function enableValidation({ formSelector, inputSelector, ...rest }) {
 }
 
 enableValidation(obj);
+
+*/

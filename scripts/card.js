@@ -34,9 +34,7 @@ class Card {
 
   //получаем разметку из template
   _getTemplate() {
-    const elementCard = document
-      .querySelector(this._template)
-      .content.firstElementChild.cloneNode(true);
+    const elementCard = document.querySelector(this._template).content.firstElementChild.cloneNode(true);
     return elementCard;
   }
 
@@ -57,9 +55,7 @@ class Card {
   }
 
   _handleLikeClick() {
-    this._element
-      .querySelector(".element__like")
-      .classList.toggle("element__like_active");
+    this._element.querySelector(".element__like").classList.toggle("element__like_active");
   }
 
   _handleDeleteCard() {
@@ -77,19 +73,13 @@ class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".element__like")
-      .addEventListener("click", () => {
+    this._element.querySelector(".element__like").addEventListener("click", () => {
         this._handleLikeClick();
       });
-    this._element
-      .querySelector(".element__delete")
-      .addEventListener("click", () => {
+    this._element.querySelector(".element__delete").addEventListener("click", () => {
         this._handleDeleteCard();
       });
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
+    this._element.querySelector(".element__image").addEventListener("click", () => {
         this._handleOpenImage();
       });
   }
