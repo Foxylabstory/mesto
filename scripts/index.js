@@ -1,3 +1,5 @@
+import {createAndAddCard} from './card.js';
+
 const elements = document.querySelector(".elements"); // находим секцию с карточками
 
 const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
@@ -20,8 +22,8 @@ const submitButtonAddCard = popupCard.querySelector('.popup__button');
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
-const figure = popupImage.querySelector(".popup__figure-img");
-const figureCaption = popupImage.querySelector(".popup__figure-caption");
+//const figure = popupImage.querySelector(".popup__figure-img");
+//const figureCaption = popupImage.querySelector(".popup__figure-caption");
 
 //Сброс ошибок в инпутах
 function resetErrorInputStatement() {
@@ -31,29 +33,9 @@ function resetErrorInputStatement() {
   });
 }
 
-//создает карточку
-function createCard(initialMassiveObject) {
-  const elementCard = document
-    .querySelector("#element-template")
-    .content.firstElementChild.cloneNode(true);
-  const elementCardImage = elementCard.querySelector(".element__image");
-  const elementCardCaption = elementCard.querySelector(".element__caption");
-  elementCardImage.src = initialMassiveObject.link;
-  elementCardImage.alt = initialMassiveObject.name;
-  elementCardCaption.textContent = initialMassiveObject.name;
-  setElementListeners(elementCard);
-  return elementCard;
-}
-
-//добавляет карточку в начало
-function renderCard(card, container) {
-  container.prepend(card);
-}
-
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
   document.addEventListener("keydown", closeByPressEsc);
-  
   somePopup.classList.add("popup_opened");
 }
 
@@ -77,42 +59,13 @@ function setCardFormViaSubmit(evt) {
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
-  const createdNewCard = createCard(newCard);
-  renderCard(createdNewCard, elements);
+  createAndAddCard(newCard, "#element-template");//вызывает публичную функцию из файла card.js, как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
+  /*const createdNewCard = createCard(newCard);
+  renderCard(createdNewCard, elements);*/
   cardForm.reset();
   closePopup(popupCard);
 }
 
-function removeElement(evt) {
-  const element = evt.currentTarget.closest(".element");
-  element.remove();
-}
-
-function setLikeElement(evt) {
-  const element = evt.currentTarget.closest(".element");
-  const like = element.querySelector(".element__like");
-  like.classList.toggle("element__like_active");
-}
-
-function viewElement(evt) {
-  const element = evt.currentTarget.closest(".element");
-  const elementImg = element.querySelector(".element__image");
-  const elementCaption = element.querySelector(".element__caption");
-  figure.src = elementImg.src;
-  figure.alt = elementCaption.textContent;
-  figureCaption.textContent = elementCaption.textContent;
-  openPopup(popupImage);
-}
-//функция по установке слушателей для элементов карточки
-function setElementListeners(element) {
-  element
-    .querySelector(".element__delete")
-    .addEventListener("click", removeElement);
-  element
-    .querySelector(".element__like")
-    .addEventListener("click", setLikeElement);
-  element.querySelector(".element__image").addEventListener("click", viewElement);
-}
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
   const closestPopup = evt.target.closest(".popup");
@@ -162,8 +115,4 @@ cardForm.addEventListener("submit", setCardFormViaSubmit);
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
 document.addEventListener("mousedown", closeByOverlayClick);
 
-// заполняем секцию elements
-initialCards.forEach(function (card) {
-  const createdCard = createCard(card);
-  renderCard(createdCard, elements);
-});
+
