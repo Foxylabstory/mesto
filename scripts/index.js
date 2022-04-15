@@ -1,6 +1,14 @@
 import {createAndAddCard} from './card.js';
+import {FormValidator} from './validate.js';
 
-const elements = document.querySelector(".elements"); // находим секцию с карточками
+const obj = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  inputErrorClass: "popup__input_type_error",
+  errorSpanClass: "popup__input-error",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_type_disable",
+};
 
 const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
 const closeProfile = popupProfile.querySelector("#profile-closer"); // находим кнопку закрытия попапа профайла
@@ -10,7 +18,6 @@ const profileEditButton = document.querySelector(".profile__edit-button"); // н
 const profileForm = document.forms.popupFormProfile; // находим форму в попапе профайла
 const profileAuthorName = profileForm.elements.popupInputName; // находим инпут для ввода имени профиля
 const profileAuthorDescription = profileForm.elements.popupInputDescription; // находим инпут для ввода описания профиля
-const submitButtonEditProfile = popupProfile.querySelector('.popup__button');
 
 const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
 const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
@@ -18,12 +25,13 @@ const popupInputCardHeader = cardForm.elements.popupInputCard;
 const popupInputCardLink = cardForm.elements.popupInputLink;
 const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
 const closeCard = popupCard.querySelector("#card-closer"); // находим кнопку закрытия попапа добавления новой карточки
-const submitButtonAddCard = popupCard.querySelector('.popup__button');
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
-//const figure = popupImage.querySelector(".popup__figure-img");
-//const figureCaption = popupImage.querySelector(".popup__figure-caption");
+
+//создание экземпляров валидации
+const profileFormValidation = new FormValidator(obj, profileForm);
+const cardFormValidation = new FormValidator(obj, cardForm);
 
 //Сброс ошибок в инпутах
 function resetErrorInputStatement() {
@@ -47,7 +55,7 @@ function closePopup(somePopup) {
 
 //обрабатывает событие по нажатию на кнопку сохранить
 function setProfileFormViaSubmit(evt) {
-  evt.preventDefault(); //сборс стандартной отправки
+  evt.preventDefault();
   authorName.textContent = profileAuthorName.value;
   authorDescription.textContent = profileAuthorDescription.value;
   closePopup(popupProfile);
@@ -60,8 +68,6 @@ function setCardFormViaSubmit(evt) {
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
   createAndAddCard(newCard, "#element-template");//вызывает публичную функцию из файла card.js, как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
-  /*const createdNewCard = createCard(newCard);
-  renderCard(createdNewCard, elements);*/
   cardForm.reset();
   closePopup(popupCard);
 }
@@ -86,11 +92,11 @@ profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
   resetErrorInputStatement();
-  setSubmitButtonStatement(profileForm, submitButtonEditProfile);// !! обращается к функции в файле validate.js
+  profileFormValidation.enableValidation();
   openPopup(popupProfile);
 });
 cardAddButton.addEventListener("click", function () {
-  setSubmitButtonStatement(cardForm, submitButtonAddCard);// !! обращается к функции в файле validate.js
+  cardFormValidation.enableValidation();
   openPopup(popupCard);
 });
 
@@ -98,6 +104,7 @@ cardAddButton.addEventListener("click", function () {
 closeProfile.addEventListener("click", function () {
   closePopup(popupProfile);
 });
+
 closeCard.addEventListener("click", function () {
   closePopup(popupCard);
 });
@@ -106,13 +113,9 @@ closeImage.addEventListener("click", function () {
   closePopup(popupImage);
 });
 
-//document.addEventListener("keydown", closeByPressEsc);
-
 //слушатели-обработчики сабмитов
 profileForm.addEventListener("submit", setProfileFormViaSubmit);
 cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
 document.addEventListener("mousedown", closeByOverlayClick);
-
-

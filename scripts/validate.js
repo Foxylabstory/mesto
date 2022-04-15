@@ -1,111 +1,53 @@
-const obj = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  inputErrorClass: "popup__input_type_error",
-  errorSpanClass: "popup__input-error",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_type_disable",
-};
-
 class FormValidator {
   constructor(data, form) {
     this._data = data;
-    this.form = document.querySelector(form);
+    this._form = form;
   }
   
-  _setSubmitButtonStatement(form, button) {
-    const isValid = form.checkValidity();
-    const inactiveButtonClass = obj.inactiveButtonClass;
-    if (!isValid) {
-      button.classList.add(inactiveButtonClass);
-      button.disabled = true;
+  _setSubmitButtonStatement() {
+    this._isValidForm = this._form.checkValidity();
+    this._button = this._form.querySelector(this._data.submitButtonSelector)
+    if (!this._isValidForm) {
+      this._button.classList.add(this._data.inactiveButtonClass);
+      this._button.disabled = true;
     } else {
-      button.classList.remove(inactiveButtonClass);
-      button.disabled = false;
+      this._button.classList.remove(this._data.inactiveButtonClass);
+      this._button.disabled = false;
     }
   }
 
-  _setRemoveSpanError(input) {
-    const span = document.querySelector(`#${input.id}-error`);
-    span.textContent = input.validationMessage;
+  _setRemoveSpanError(inputElement) {
+    this._span = this._form.querySelector(`#${inputElement.id}-error`);
+    this._span.textContent = inputElement.validationMessage;
   }
   
-  _isValid(form, input, button, rest) {
-    //**проверка валидности
-    if (input.validity.valid) {
-      //**скрыть ошибку
-      setRemoveSpanError(input);
-      //**валидация кнопки
-      setSubmitButtonStatement(form, button);
+  //проверка валидности
+  _isValid(inputElement) {
+    if (inputElement.validity.valid) {
+      //скрыть ошибку
+      this._setRemoveSpanError(inputElement);
+      //валидация кнопки
+      this._setSubmitButtonStatement();
     } else {
-      //**показать ошибку
-      setRemoveSpanError(input);
-      //**валидация кнопки
-      setSubmitButtonStatement(form, button);
+      //показать ошибку
+      this._setRemoveSpanError(inputElement);
+      //валидация кнопки
+      this._setSubmitButtonStatement();
     }
   }
   
-  _setInputListeners(form, inputSelector, { submitButtonSelector, ...rest }) {
-    //**наложение обработчиков
-    const inputs = Array.from(form.querySelectorAll(inputSelector));
-    const button = form.querySelector(submitButtonSelector);
-    inputs.forEach((input) => {
-      input.addEventListener("input", () => {
-        isValid(form, input, button, rest);
+  //запуск валидации
+  enableValidation() {
+    this._inputLists = Array.from(this._form.querySelectorAll(this._data.inputSelector));
+    //еще нужно проверить и установить состояние кнопки при вызове
+    this._setSubmitButtonStatement();
+    //на каждый инпут устанавливаю проверку формы
+    this._inputLists.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        this._isValid(inputElement);
       });
     });
   }
-  
-  enableValidation({ formSelector, inputSelector, ...rest }) {
-    // *запуск валидации
-    const forms = Array.from(document.querySelectorAll(formSelector));
-    forms.forEach((form) => {
-      setInputListeners(form, inputSelector, rest);
-    });
-  }
-
 }
 
-/*
-function setRemoveSpanError(input) {
-  const span = document.querySelector(`#${input.id}-error`);
-  span.textContent = input.validationMessage;
-}
-
-function isValid(form, input, button, rest) {
-  //проверка валидности
-  if (input.validity.valid) {
-    //скрыть ошибку
-    setRemoveSpanError(input);
-    //**валидация кнопки
-    setSubmitButtonStatement(form, button);
-  } else {
-    //**показать ошибку
-    setRemoveSpanError(input);
-    //**валидация кнопки
-    setSubmitButtonStatement(form, button);
-  }
-}
-
-function setInputListeners(form, inputSelector, { submitButtonSelector, ...rest }) {
-  //**наложение обработчиков
-  const inputs = Array.from(form.querySelectorAll(inputSelector));
-  const button = form.querySelector(submitButtonSelector);
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      isValid(form, input, button, rest);
-    });
-  });
-}
-
-function enableValidation({ formSelector, inputSelector, ...rest }) {
-  // *запуск валидации
-  const forms = Array.from(document.querySelectorAll(formSelector));
-  forms.forEach((form) => {
-    setInputListeners(form, inputSelector, rest);
-  });
-}
-
-enableValidation(obj);
-
-*/
+export {FormValidator}
