@@ -1,4 +1,5 @@
 import {initialCards} from './initialCards.js';
+import {openPopup} from './index.js'
 
 class Card {
   constructor(data, template) {
@@ -42,9 +43,8 @@ class Card {
     const _figureCaption = document.querySelector(".popup__figure-caption");
     _figure.src = this._element.querySelector(".element__image").src;
     _figure.alt = this._element.querySelector(".element__caption").textContent;
-    _figureCaption.textContent =
-      this._element.querySelector(".element__caption").textContent;
-    document.querySelector("#popup-image").classList.add("popup_opened");
+    _figureCaption.textContent = this._element.querySelector(".element__caption").textContent;
+    openPopup(document.querySelector("#popup-image"));
   }
 
   _setEventListeners() {

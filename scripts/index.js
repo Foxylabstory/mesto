@@ -95,6 +95,7 @@ profileEditButton.addEventListener("click", function () {
   profileFormValidation.enableValidation();
   openPopup(popupProfile);
 });
+
 cardAddButton.addEventListener("click", function () {
   cardFormValidation.enableValidation();
   openPopup(popupCard);
@@ -119,3 +120,5 @@ cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
 document.addEventListener("mousedown", closeByOverlayClick);
+
+export {openPopup}
