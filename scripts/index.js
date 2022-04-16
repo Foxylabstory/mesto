@@ -1,5 +1,6 @@
-import {createAndAddCard} from './card.js';
-import {FormValidator} from './validate.js';
+import {Card} from './Card.js';
+import {FormValidator} from './Validate.js';
+import {initialCards} from './initialCards.js';
 
 const obj = {
   formSelector: ".popup__form",
@@ -9,6 +10,7 @@ const obj = {
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_type_disable",
 };
+const cardElements = document.querySelector(".elements");
 
 const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
 const closeProfile = popupProfile.querySelector("#profile-closer"); // находим кнопку закрытия попапа профайла
@@ -28,10 +30,19 @@ const closeCard = popupCard.querySelector("#card-closer"); // находим к�
 
 const popupImage = document.querySelector("#popup-image");
 const closeImage = popupImage.querySelector("#image-closer");
+const popupImageFigure = popupImage.querySelector('.popup__figure-img');
+const popupImageFigureCaption = popupImage.querySelector('.popup__figure-caption');
 
 //создание экземпляров валидации
 const profileFormValidation = new FormValidator(obj, profileForm);
 const cardFormValidation = new FormValidator(obj, cardForm);
+
+//создает экземпляр карточки, заполняет его и добавляет в DOM
+function createAndAddCard(item, template, handleCardClick) {
+  const card = new Card(item, template, handleCardClick);
+  const cardElement = card.generateCard();
+  cardElements.prepend(cardElement);
+}
 
 //Сброс ошибок в инпутах
 function resetErrorInputStatement() {
@@ -67,7 +78,7 @@ function setCardFormViaSubmit(evt) {
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
-  createAndAddCard(newCard, "#element-template");//вызывает публичную функцию из файла card.js, как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
+  createAndAddCard(newCard, "#element-template", handleCardClick);//как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
   cardForm.reset();
   closePopup(popupCard);
 }
@@ -101,6 +112,14 @@ cardAddButton.addEventListener("click", function () {
   openPopup(popupCard);
 });
 
+//заполнение popupImgage и навешивание слушателя, для дальнейшей передачи в конструктор Card
+function handleCardClick(name, link) {
+  popupImageFigure.src = link;//устанавливаем ссылку
+  popupImageFigure.alt = name;
+  popupImageFigureCaption.textContent = name;//устанавливаем подпись картинке
+  openPopup(popupImage);//открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+}
+
 //слушатели на закрытие
 closeProfile.addEventListener("click", function () {
   closePopup(popupProfile);
@@ -120,5 +139,10 @@ cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
 document.addEventListener("mousedown", closeByOverlayClick);
+
+//обходит массив с начальными карточками и заполняет их в DOM
+initialCards.forEach((item) => {
+  createAndAddCard(item, "#element-template", handleCardClick);
+});
 
 export {openPopup}

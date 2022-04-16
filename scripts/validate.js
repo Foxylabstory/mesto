@@ -39,6 +39,7 @@ class FormValidator {
       inputElement.classList.add(this._data.inputErrorClass);
     }
   }
+  6
   
   //запуск валидации
   enableValidation() {

@@ -1,11 +1,9 @@
-import {initialCards} from './initialCards.js';
-import {openPopup} from './index.js'
-
 class Card {
-  constructor(data, template) {
+  constructor(data, template, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
     this._template = template; //выбор разметки template, ну так, на будущее...
+    this._handleCardClick = handleCardClick;// получаем функцию которая заполняет popupImage и навешивает слушатель
   }
 
   //получаем разметку из template
@@ -15,7 +13,7 @@ class Card {
   }
 
   //устанавливаем в полученную разметку данные
-  _generateCard() {
+  generateCard() {
     //записываем разметку в приватное поле
     this._element = this._getTemplate();
     //Устанавлниваем слушатели на полученный элемент
@@ -38,14 +36,14 @@ class Card {
     this._element.remove();
   }
 
-  _handleOpenImage() {
+  /*_handleOpenImage() {
     const _figure = document.querySelector(".popup__figure-img");
     const _figureCaption = document.querySelector(".popup__figure-caption");
     _figure.src = this._element.querySelector(".element__image").src;
     _figure.alt = this._element.querySelector(".element__caption").textContent;
     _figureCaption.textContent = this._element.querySelector(".element__caption").textContent;
-    openPopup(document.querySelector("#popup-image"));
-  }
+    //openPopup(document.querySelector("#popup-image"));
+  }*/
 
   _setEventListeners() {
     this._element.querySelector(".element__like").addEventListener("click", () => {
@@ -55,22 +53,23 @@ class Card {
         this._handleDeleteCard();
       });
     this._element.querySelector(".element__image").addEventListener("click", () => {
-        this._handleOpenImage();
+      console.log('тык');
+      this._handleCardClick(this._name, this._link);
       });
   }
 }
 
-function createAndAddCard(item, template) {
+/*function createAndAddCard(item, template) {
   // Создадим экземпляр карточки
   const card = new Card(item, template);
   // Заполняем карточку и возвращаем наружу
-  const cardElement = card._generateCard();
+  const cardElement = card.generateCard();
   // Добавляем в DOM
   document.querySelector(".elements").prepend(cardElement);
 }
 
 initialCards.forEach((item) => {
   createAndAddCard(item, "#element-template");
-});
+});*/
 
-export {createAndAddCard};
+export {Card};
