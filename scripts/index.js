@@ -102,22 +102,27 @@ function closeByPressEsc(evt) {
 profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
-  resetErrorInputStatement();
+  //resetErrorInputStatement();
+  profileFormValidation.resetValidation();
   profileFormValidation.enableValidation();
   openPopup(popupProfile);
 });
 
 cardAddButton.addEventListener("click", function () {
+  //cardFormValidation.resetValidation();
+  /*здесь устанавливать сброс ошибок не вижу смысла,
+  потому что пользователь может ввести неправильные данные, закрыть попап,
+  открыть попап (форма при открытии не очищается) и продолжить редактировать поле, а при открытии кнопка и так заблокирована если форма содержит некорректные данные*/
   cardFormValidation.enableValidation();
   openPopup(popupCard);
 });
 
 //заполнение popupImgage и навешивание слушателя, для дальнейшей передачи в конструктор Card
 function handleCardClick(name, link) {
-  popupImageFigure.src = link;//устанавливаем ссылку
+  popupImageFigure.src = link;
   popupImageFigure.alt = name;
-  popupImageFigureCaption.textContent = name;//устанавливаем подпись картинке
-  openPopup(popupImage);//открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+  popupImageFigureCaption.textContent = name;
+  openPopup(popupImage);
 }
 
 //слушатели на закрытие
@@ -146,3 +151,5 @@ initialCards.forEach((item) => {
 });
 
 export {openPopup}
+
+//Спасибо за ревью, очень интересно и познавательно.
