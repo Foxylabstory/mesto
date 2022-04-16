@@ -2,7 +2,7 @@ import {Card} from './Card.js';
 import {FormValidator} from './Validate.js';
 import {initialCards} from './initialCards.js';
 
-const obj = {
+const formConfiguration = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   inputErrorClass: "popup__input_type_error",
@@ -10,7 +10,10 @@ const obj = {
   submitButtonSelector: ".popup__button",
   inactiveButtonClass: "popup__button_type_disable",
 };
+
 const cardElements = document.querySelector(".elements");
+
+const popups = document.querySelectorAll('.popup');
 
 const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
 const closeProfile = popupProfile.querySelector("#profile-closer"); // находим кнопку закрытия попапа профайла
@@ -34,8 +37,23 @@ const popupImageFigure = popupImage.querySelector('.popup__figure-img');
 const popupImageFigureCaption = popupImage.querySelector('.popup__figure-caption');
 
 //создание экземпляров валидации
-const profileFormValidation = new FormValidator(obj, profileForm);
-const cardFormValidation = new FormValidator(obj, cardForm);
+//const profileFormValidation = new FormValidator(formConfiguration, profileForm);
+//const cardFormValidation = new FormValidator(formConfiguration, cardForm);
+
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name');
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
 //создает экземпляр карточки, заполняет его и добавляет в DOM
 function createAndAddCard(item, template, handleCardClick) {
@@ -45,12 +63,12 @@ function createAndAddCard(item, template, handleCardClick) {
 }
 
 //Сброс ошибок в инпутах
-function resetErrorInputStatement() {
+/*function resetErrorInputStatement() {
   const inputsSpanErrorList = document.querySelectorAll('.popup__input-error');
   inputsSpanErrorList.forEach((item) => {
     item.textContent = '';
   });
-}
+}*/
 
 //добавляет класс .popup_opened
 function openPopup(somePopup) {
@@ -82,7 +100,7 @@ function setCardFormViaSubmit(evt) {
   cardForm.reset();
   closePopup(popupCard);
 }
-
+/*
 //сравнивает места нажатия кликов, если совпадает целевой клик с расположением обработчика, попап закрывается
 function closeByOverlayClick(evt) {
   const closestPopup = evt.target.closest(".popup");
@@ -90,7 +108,7 @@ function closeByOverlayClick(evt) {
     closePopup(closestPopup);
   }
 }
-
+*/
 function closeByPressEsc(evt) {
   if (evt.key === "Escape") {//&& document.querySelector(".popup_opened")
     const popup = document.querySelector(".popup_opened");
@@ -103,17 +121,16 @@ profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = authorName.textContent;
   profileAuthorDescription.value = authorDescription.textContent;
   //resetErrorInputStatement();
-  profileFormValidation.resetValidation();
-  profileFormValidation.enableValidation();
+  //profileFormValidation.resetValidation();
+  formValidators[profileForm.getAttribute('name')].resetValidation();
+  //profileFormValidation.enableValidation();
   openPopup(popupProfile);
 });
 
 cardAddButton.addEventListener("click", function () {
   //cardFormValidation.resetValidation();
-  /*здесь устанавливать сброс ошибок не вижу смысла,
-  потому что пользователь может ввести неправильные данные, закрыть попап,
-  открыть попап (форма при открытии не очищается) и продолжить редактировать поле, а при открытии кнопка и так заблокирована если форма содержит некорректные данные*/
-  cardFormValidation.enableValidation();
+  formValidators[cardForm.getAttribute('name')].resetValidation();
+  //cardFormValidation.enableValidation();
   openPopup(popupCard);
 });
 
@@ -125,6 +142,18 @@ function handleCardClick(name, link) {
   openPopup(popupImage);
 }
 
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__form-closer')) {
+          closePopup(popup);
+        }
+    })
+})
+
+/*
 //слушатели на закрытие
 closeProfile.addEventListener("click", function () {
   closePopup(popupProfile);
@@ -137,18 +166,23 @@ closeCard.addEventListener("click", function () {
 closeImage.addEventListener("click", function () {
   closePopup(popupImage);
 });
-
+*/
 //слушатели-обработчики сабмитов
 profileForm.addEventListener("submit", setProfileFormViaSubmit);
 cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
-document.addEventListener("mousedown", closeByOverlayClick);
+//document.addEventListener("mousedown", closeByOverlayClick);
 
 //обходит массив с начальными карточками и заполняет их в DOM
 initialCards.forEach((item) => {
   createAndAddCard(item, "#element-template", handleCardClick);
 });
+
+//включаем валидацию форм
+//profileFormValidation.enableValidation();
+//cardFormValidation.enableValidation();
+enableValidation(formConfiguration);
 
 export {openPopup}
 
