@@ -44,7 +44,6 @@ class Card {
         this._handleDeleteCard();
       });
     this._element.querySelector(".element__image").addEventListener("click", () => {
-      console.log('тык');
       this._handleCardClick(this._name, this._link);
       });
   }
