@@ -1,5 +1,5 @@
 import {Card} from './Card.js';
-import {FormValidator} from './Validate.js';
+import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initialCards.js';
 
 const formConfiguration = {
@@ -16,7 +16,6 @@ const cardElements = document.querySelector(".elements");
 const popups = document.querySelectorAll('.popup');
 
 const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
-const closeProfile = popupProfile.querySelector("#profile-closer"); // находим кнопку закрытия попапа профайла
 const authorName = document.querySelector(".profile__name"); // находим имя профиля на странице
 const authorDescription = document.querySelector(".profile__description"); // находим описание профиля на странице
 const profileEditButton = document.querySelector(".profile__edit-button"); // находим кнопку открытия редактирования профиля
@@ -29,10 +28,8 @@ const cardForm = document.forms.popupFormCard; // находим форму по
 const popupInputCardHeader = cardForm.elements.popupInputCard;
 const popupInputCardLink = cardForm.elements.popupInputLink;
 const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
-const closeCard = popupCard.querySelector("#card-closer"); // находим кнопку закрытия попапа добавления новой карточки
 
 const popupImage = document.querySelector("#popup-image");
-const closeImage = popupImage.querySelector("#image-closer");
 const popupImageFigure = popupImage.querySelector('.popup__figure-img');
 const popupImageFigureCaption = popupImage.querySelector('.popup__figure-caption');
 
