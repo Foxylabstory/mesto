@@ -36,15 +36,6 @@ class Card {
     this._element.remove();
   }
 
-  /*_handleOpenImage() {
-    const _figure = document.querySelector(".popup__figure-img");
-    const _figureCaption = document.querySelector(".popup__figure-caption");
-    _figure.src = this._element.querySelector(".element__image").src;
-    _figure.alt = this._element.querySelector(".element__caption").textContent;
-    _figureCaption.textContent = this._element.querySelector(".element__caption").textContent;
-    //openPopup(document.querySelector("#popup-image"));
-  }*/
-
   _setEventListeners() {
     this._element.querySelector(".element__like").addEventListener("click", () => {
         this._handleLikeClick();
@@ -58,18 +49,5 @@ class Card {
       });
   }
 }
-
-/*function createAndAddCard(item, template) {
-  // Создадим экземпляр карточки
-  const card = new Card(item, template);
-  // Заполняем карточку и возвращаем наружу
-  const cardElement = card.generateCard();
-  // Добавляем в DOM
-  document.querySelector(".elements").prepend(cardElement);
-}
-
-initialCards.forEach((item) => {
-  createAndAddCard(item, "#element-template");
-});*/
 
 export {Card};
