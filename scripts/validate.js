@@ -3,7 +3,8 @@ class FormValidator {
     this._data = data;
     this._form = form;
   }
-  
+
+  //установка состояния кнопки
   _setSubmitButtonStatement() {
     this._isValidForm = this._form.checkValidity();
     this._button = this._form.querySelector(this._data.submitButtonSelector)
@@ -16,6 +17,7 @@ class FormValidator {
     }
   }
 
+  //установка текста ошибки
   _setRemoveSpanError(inputElement) {
     this._span = this._form.querySelector(`#${inputElement.id}-error`);
     this._span.textContent = inputElement.validationMessage;
@@ -28,11 +30,13 @@ class FormValidator {
       this._setRemoveSpanError(inputElement);
       //валидация кнопки
       this._setSubmitButtonStatement();
+      inputElement.classList.remove(this._data.inputErrorClass);
     } else {
       //показать ошибку
       this._setRemoveSpanError(inputElement);
       //валидация кнопки
       this._setSubmitButtonStatement();
+      inputElement.classList.add(this._data.inputErrorClass);
     }
   }
   
