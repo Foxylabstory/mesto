@@ -16,13 +16,15 @@ class Card {
   generateCard() {
     //записываем разметку в приватное поле
     this._element = this._getTemplate();
+    this._elementImage = this._element.querySelector(".element__image");
+    this._elementCaption = this._element.querySelector(".element__caption");
     //Устанавлниваем слушатели на полученный элемент
     this._setEventListeners();
 
     //устанавливаем данные
-    this._element.querySelector(".element__image").src = this._link;
-    this._element.querySelector(".element__image").alt = this._name;
-    this._element.querySelector(".element__caption").textContent = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
+    this._elementCaption.textContent = this._name;
 
     // Вернём элемент наружу
     return this._element;
