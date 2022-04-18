@@ -49,9 +49,14 @@ const enableValidation = (config) => {
 };
 
 //создает экземпляр карточки, заполняет его и добавляет в DOM
-function createAndAddCard(item, template, handleCardClick) {
-  const card = new Card(item, template, handleCardClick);
+function createCard(item) {
+  const card = new Card(item, "#element-template", handleCardClick);
   const cardElement = card.generateCard();
+  return cardElement;
+  //cardElements.prepend(cardElement);
+}
+
+function insertPrependCard(cardElement) {
   cardElements.prepend(cardElement);
 }
 
@@ -81,7 +86,8 @@ function setCardFormViaSubmit(evt) {
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
-  createAndAddCard(newCard, "#element-template", handleCardClick);//как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
+  //createCard(newCard);
+  insertPrependCard(createCard(newCard));
   cardForm.reset();
   closePopup(popupCard);
 }
@@ -131,7 +137,8 @@ cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //обходит массив с начальными карточками и заполняет их в DOM
 initialCards.forEach((item) => {
-  createAndAddCard(item, "#element-template", handleCardClick);
+  //createCard(item);
+  insertPrependCard(createCard(item));
 });
 
 //включаем валидацию форм
