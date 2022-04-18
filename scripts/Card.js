@@ -18,6 +18,9 @@ class Card {
     this._element = this._getTemplate();
     this._elementImage = this._element.querySelector(".element__image");
     this._elementCaption = this._element.querySelector(".element__caption");
+    this._elementDelete = this._element.querySelector(".element__delete");
+    this._elementLike = this._element.querySelector(".element__like");
+
     //Устанавлниваем слушатели на полученный элемент
     this._setEventListeners();
 
@@ -25,13 +28,14 @@ class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     this._elementCaption.textContent = this._name;
+    
 
     // Вернём элемент наружу
     return this._element;
   }
 
   _handleLikeClick() {
-    this._element.querySelector(".element__like").classList.toggle("element__like_active");
+    this._elementLike.classList.toggle("element__like_active");
   }
 
   _handleDeleteCard() {
@@ -39,16 +43,18 @@ class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector(".element__like").addEventListener("click", () => {
+    this._elementLike.addEventListener("click", () => {
         this._handleLikeClick();
       });
-    this._element.querySelector(".element__delete").addEventListener("click", () => {
+      this._elementDelete.addEventListener("click", () => {
         this._handleDeleteCard();
       });
-    this._element.querySelector(".element__image").addEventListener("click", () => {
+      this._elementImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
       });
   }
 }
 
 export {Card};
+
+//извиниете, в прошлый раз при переименовании файлов, изменения стерлись, и как так вышло мне непонятно. все эти изменения были реализованы ранее.

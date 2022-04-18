@@ -39,6 +39,21 @@ function resetErrorInputStatement() {
   inputsSpanErrorList.forEach((item) => {
     item.textContent = '';
   });
+};
+
+//создает экземпляр карточки, заполняет его и добавляет в DOM
+function createCard(item) {
+  const card = new Card(item, "#element-template", handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+function insertPrependCard(cardElement) {
+  cardElements.prepend(cardElement);
+}
+
+function insertAppendCard(cardElement) {
+  cardElements.append(cardElement);
 }
 
 //добавляет класс .popup_opened
@@ -67,7 +82,7 @@ function setCardFormViaSubmit(evt) {
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
-  createAndAddCard(newCard, "#element-template");//вызывает публичную функцию из файла card.js, как параметр передается вновь созданный объект и вид разметки template, если разметку заменить, будет другая форма карточки
+  insertPrependCard(createCard(newCard));
   cardForm.reset();
   closePopup(popupCard);
 }
@@ -117,7 +132,9 @@ closeImage.addEventListener("click", function () {
 profileForm.addEventListener("submit", setProfileFormViaSubmit);
 cardForm.addEventListener("submit", setCardFormViaSubmit);
 
-//слушатель по всему попапу, что бы закрывать попап при клике в любом месте, кроме попапа-контейнера
-document.addEventListener("mousedown", closeByOverlayClick);
+//обходит массив с начальными карточками и заполняет их в DOM
+initialCards.forEach((item) => {
+  insertAppendCard(createCard(item));
+});
 
 export {openPopup}
