@@ -53,11 +53,14 @@ function createCard(item) {
   const card = new Card(item, "#element-template", handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
-  //cardElements.prepend(cardElement);
 }
 
 function insertPrependCard(cardElement) {
   cardElements.prepend(cardElement);
+}
+
+function insertAppendCard(cardElement) {
+  cardElements.append(cardElement);
 }
 
 //добавляет класс .popup_opened
@@ -86,7 +89,6 @@ function setCardFormViaSubmit(evt) {
   const newCard = {};
   newCard.name = popupInputCardHeader.value;
   newCard.link = popupInputCardLink.value;
-  //createCard(newCard);
   insertPrependCard(createCard(newCard));
   cardForm.reset();
   closePopup(popupCard);
@@ -137,8 +139,7 @@ cardForm.addEventListener("submit", setCardFormViaSubmit);
 
 //обходит массив с начальными карточками и заполняет их в DOM
 initialCards.forEach((item) => {
-  //createCard(item);
-  insertPrependCard(createCard(item));
+  insertAppendCard(createCard(item));
 });
 
 //включаем валидацию форм
