@@ -2,6 +2,8 @@ import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initialCards.js';
 
+import '../pages/index.css';
+
 const formConfiguration = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
