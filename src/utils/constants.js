@@ -7,13 +7,13 @@ const formConfiguration = {
     inactiveButtonClass: "popup__button_type_disable",
   };
   
-  const cardElements = document.querySelector(".elements");
+  //const cardElements = document.querySelector(".elements");
   
-  const popups = document.querySelectorAll('.popup');
+  //const popups = document.querySelectorAll('.popup');
   
   const popupProfile = document.querySelector("#popup-profile"); // находим попап профайла
-  const authorName = document.querySelector(".profile__name"); // находим имя профиля на странице
-  const authorDescription = document.querySelector(".profile__description"); // находим описание профиля на странице
+  //const authorName = document.querySelector(".profile__name"); // находим имя профиля на странице
+  //const authorDescription = document.querySelector(".profile__description"); // находим описание профиля на странице
   const profileEditButton = document.querySelector(".profile__edit-button"); // находим кнопку открытия редактирования профиля
   const profileForm = document.forms.popupFormProfile; // находим форму в попапе профайла
   const profileAuthorName = profileForm.elements.popupInputName; // находим инпут для ввода имени профиля
@@ -21,8 +21,8 @@ const formConfiguration = {
   
   const popupCard = document.querySelector("#popup-card"); // находим попап добавления новой карточки
   const cardForm = document.forms.popupFormCard; // находим форму попапа добавления новой карточки
-  const popupInputCardHeader = cardForm.elements.popupInputCard;
-  const popupInputCardLink = cardForm.elements.popupInputLink;
+  //const popupInputCardHeader = cardForm.elements.popupInputCard;
+  //const popupInputCardLink = cardForm.elements.popupInputLink;
   const cardAddButton = document.querySelector("#profile-add-button"); // находим на странице кнопку добавления новой карточки
   
   const popupImage = document.querySelector("#popup-image");
@@ -31,7 +31,7 @@ const formConfiguration = {
   
   const formValidators = {}
 
-  export {formConfiguration, cardElements, popups, popupProfile, authorName, authorDescription, 
+  export {formConfiguration, popupProfile, 
     profileEditButton, profileForm, profileAuthorName, profileAuthorDescription, popupCard, cardForm,
-    popupInputCardHeader, popupInputCardLink, cardAddButton, popupImage, popupImageFigure,
+    cardAddButton, popupImage, popupImageFigure,
     popupImageFigureCaption, formValidators}
