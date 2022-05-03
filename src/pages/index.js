@@ -26,6 +26,8 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
+//включаем валидацию форм
+enableValidation(formConfiguration);
 
 //создает экземпляр карточки, заполняет его
 function createCard(item) {
@@ -43,47 +45,30 @@ const cardsList = new Section({
 },
 '.elements'
 );
+//обходит массив с начальными карточками и заполняет их в DOM
+cardsList.renderItems();
 
+//сщздание экземпляра класса UserInfo содержащий объект с данными о пользователе
 const userInfo = new UserInfo({name:'.profile__name', description:'.profile__description'});
 
-//создание экземпляров класса Popup для каждого попапа
+//создание экземпляров класса Popup для попапа профайла
 const popupProfileClass = new PopupWithForm((data) => {
   userInfo.setUserInfo({data});
 }, popupProfile);
 
+//обрабатывает событие по нажатию на кнопку сохранить для попапа профайла
 popupProfileClass.setEventListeners();
 
+//создание экземпляров класса Popup для попапа добавления карточки
 //const popupCardClass = new PopupWithForm((data) => {}, popupCard);
-//const popupCardClass = new Popup(popupCard);
+const popupCardClass = new Popup(popupCard);
 
-/*function insertAppendCard(cardElement) {
-  cardElements.append(cardElement);
-}*/
+//обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки
+popupCardClass.setEventListeners();
 
 function insertPrependCard(cardElement) {
   cardElements.prepend(cardElement);
 }
-
-//добавляет класс .popup_opened
-/*function openPopup(somePopup) {
-  document.addEventListener("keydown", closeByPressEsc);
-  somePopup.classList.add("popup_opened");
-}*/
-
-//убирает класс .popup_opened
-/*function closePopup(somePopup) {
-  document.removeEventListener("keydown", closeByPressEsc);
-  somePopup.classList.remove("popup_opened");
-}*/
-
-//обрабатывает событие по нажатию на кнопку сохранить
-/*function setProfileFormViaSubmit(evt) {
-  evt.preventDefault();
-  authorName.textContent = profileAuthorName.value;
-  authorDescription.textContent = profileAuthorDescription.value;
-  popupProfileClass.close();
-  //closePopup(popupProfile);
-}*/
 
 //обрабатывает событие по нажатию на кнопку сохранить
 function setCardFormViaSubmit(evt) {
@@ -94,15 +79,7 @@ function setCardFormViaSubmit(evt) {
   insertPrependCard(createCard(newCard));
   cardForm.reset();
   popupCardClass.close();
-  //closePopup(popupCard);
 }
-
-/*function closeByPressEsc(evt) {
-  if (evt.key === "Escape") {
-    const popup = document.querySelector(".popup_opened");
-    closePopup(popup);
-  }
-}*/
 
 //слушатели на открытие попапа редактирования профиля/done
 profileEditButton.addEventListener("click", function () {
@@ -110,14 +87,12 @@ profileEditButton.addEventListener("click", function () {
   profileAuthorDescription.value = userInfo.getUserInfo().description;
   formValidators[profileForm.getAttribute('name')].resetValidation();
   popupProfileClass.open();
-  //openPopup(popupProfile);
 });
 
 //слушатели на открытие попапа добавления карточки
 cardAddButton.addEventListener("click", function () {
   formValidators[cardForm.getAttribute('name')].resetValidation();
   popupCardClass.open();
-  //openPopup(popupCard);
 });
 
 //заполнение popupImgage и навешивание слушателя, для дальнейшей передачи в конструктор Card
@@ -127,6 +102,7 @@ function handleCardClick(name, link) {
   //popupImageFigure.alt = name;
   //popupImageFigureCaption.textContent = name;
   popupImageClass.open();
+  popupImageClass.setEventListeners();
   //openPopup(popupImage);
 }
 /*
@@ -146,14 +122,5 @@ popups.forEach((popup) => {
 })*/
 
 //слушатели-обработчики сабмитов
-//profileForm.addEventListener("submit", setProfileFormViaSubmit);
 //cardForm.addEventListener("submit", setCardFormViaSubmit);
 
-//обходит массив с начальными карточками и заполняет их в DOM
-/*initialCards.forEach((item) => {
-  insertAppendCard(createCard(item));
-});*/
-cardsList.renderItems();
-
-//включаем валидацию форм
-enableValidation(formConfiguration);
