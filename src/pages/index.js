@@ -60,8 +60,13 @@ const popupProfileClass = new PopupWithForm((data) => {
 popupProfileClass.setEventListeners();
 
 //создание экземпляров класса Popup для попапа добавления карточки
-//const popupCardClass = new PopupWithForm((data) => {}, popupCard);
-const popupCardClass = new Popup(popupCard);
+const popupCardClass = new PopupWithForm((data) => {
+  const newCard = {};
+  newCard.name = data.popupInputCard;
+  newCard.link = data.popupInputLink;
+  cardsList.addItemPrepend(createCard(newCard));
+}, popupCard);
+//const popupCardClass = new Popup(popupCard);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки
 popupCardClass.setEventListeners();
@@ -81,7 +86,7 @@ function setCardFormViaSubmit(evt) {
   popupCardClass.close();
 }
 
-//слушатели на открытие попапа редактирования профиля/done
+//слушатели на открытие попапа редактирования профиля
 profileEditButton.addEventListener("click", function () {
   profileAuthorName.value = userInfo.getUserInfo().name;
   profileAuthorDescription.value = userInfo.getUserInfo().description;
@@ -108,19 +113,8 @@ function handleCardClick(name, link) {
 /*
 popups.forEach((popup) => {
   const popupClass = new Popup(popup);
-  popupClass.setEventListeners();
-  
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-            closePopup(popup);
-        }
-        if (evt.target.classList.contains('popup__form-closer')) {
-          closePopup(popup);
-        }
-    })
-  
+  popupClass.setEventListeners();  
 })*/
 
 //слушатели-обработчики сабмитов
 //cardForm.addEventListener("submit", setCardFormViaSubmit);
-
