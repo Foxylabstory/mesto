@@ -4,7 +4,7 @@
   background-image: url("../../../images/header/mesto-russia-logo.svg");
   background-size: contain;
   background-position: center;
-  background-repeat: no-repeat
+  background-repeat: no-repeat;
 }
 
 @media (max-width: 922px) {
