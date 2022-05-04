@@ -6,8 +6,8 @@ export default class UserInfo {
 
   getUserInfo() {
     const userInfoData = {
-      name: this._name.textContent,
-      description: this._description.textContent,
+      popupInputName: this._name.textContent,
+      popupInputDescription: this._description.textContent,
     };
     return userInfoData;
   }

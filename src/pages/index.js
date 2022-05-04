@@ -1,3 +1,5 @@
+//спасибо за ревью
+
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {initialCards} from '../utils/initialCards.js';
@@ -7,7 +9,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
 import {formConfiguration, popupProfile, 
-  profileEditButton, profileForm, profileAuthorName, profileAuthorDescription, popupCard, cardForm,
+  profileEditButton, profileForm, popupCard, cardForm,
   cardAddButton, popupImage, formValidators} from '../utils/constants.js';
 
 import '../pages/index.css';
@@ -28,10 +30,10 @@ const enableValidation = (config) => {
 enableValidation(formConfiguration);
 
 //заполнение popupImgage и навешивание слушателя, для дальнейшей передачи в конструктор Card
+const popupImageClass = new PopupWithImage(popupImage);
+popupImageClass.setEventListeners();
 function handleCardClick(name, link) {
-  const popupImageClass = new PopupWithImage(name, link, popupImage);
-  popupImageClass.open();
-  popupImageClass.setEventListeners();
+  popupImageClass.open(name, link);
 }
 
 //создает экземпляр карточки, заполняет его
@@ -68,7 +70,7 @@ const popupCardClass = new PopupWithForm((data) => {
   const newCard = {};
   newCard.name = data.popupInputCard;
   newCard.link = data.popupInputLink;
-  cardsList.addItemPrepend(createCard(newCard));
+  cardsList.prependItem(createCard(newCard));
 }, popupCard);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки
@@ -76,8 +78,8 @@ popupCardClass.setEventListeners();
 
 //слушатели на открытие попапа редактирования профиля
 profileEditButton.addEventListener("click", function () {
-  profileAuthorName.value = userInfo.getUserInfo().name;
-  profileAuthorDescription.value = userInfo.getUserInfo().description;
+  const {popupInputName, popupInputDescription} = userInfo.getUserInfo()
+  popupProfileClass.setInputValues({popupInputName, popupInputDescription});
   formValidators[profileForm.getAttribute('name')].resetValidation();
   popupProfileClass.open();
 });

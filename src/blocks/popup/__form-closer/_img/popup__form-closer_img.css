@@ -1,8 +1,8 @@
 .popup__form-closer_img {
-  /*position: unset;
+  position: unset;
     margin-left: calc(100% - 16px);
-    margin-bottom: 8px;*/
-  position: absolute;
-  top: -25px;
-  right: -25px;
+    margin-bottom: 8px;
+  /*position: absolute;
+  top: -40px;
+  right: -40px;*/
 }
