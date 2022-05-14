@@ -35,7 +35,6 @@ const api = new Api({
 //установка инфо о пользователе при загрузке
 const initialUserInfoFromApi = api.getUserInfo();
 initialUserInfoFromApi.then((data) => {
-  console.log(data);
   userInfo.setUserInfoFromApi({ data });
 });
 
@@ -102,11 +101,11 @@ const userInfo = new UserInfo({
   name: ".profile__name",
   description: ".profile__description",
   avatar: ".profile__avatar"
-});
+}, api);
 
 //создание экземпляра класса Popup для попапа профайла
 const popupProfileClass = new PopupWithForm((data) => {
-  userInfo.setUserInfo({ data });
+  userInfo.setUserInfoToApi({ data });
 }, popupProfile);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа профайла

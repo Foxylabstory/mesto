@@ -1,8 +1,9 @@
 export default class UserInfo {
-  constructor({ name, description, avatar }) {
+  constructor({name, description, avatar}, api) {
     this._name = document.querySelector(name);
     this._description = document.querySelector(description);
     this._avatar = document.querySelector(avatar);
+    this._api = api;
   }
 
   getUserInfo() {
@@ -13,9 +14,14 @@ export default class UserInfo {
     return userInfoData;
   }
 
-  setUserInfo({ data }) {
-    this._name.textContent = data.popupInputName;
-    this._description.textContent = data.popupInputDescription;
+  setUserInfoToApi({ data }) {
+    this._api
+      .setUserInfoToApi({ name: data.popupInputName, about: data.popupInputDescription })
+      .then((data) => {
+        this.setUserInfoFromApi({ data })
+      }).catch((err) => console.log(err));
+    //this._name.textContent = data.popupInputName;
+    //this._description.textContent = data.popupInputDescription;
   }
 
   setUserInfoFromApi({ data }) {

@@ -18,6 +18,14 @@ export default class Api {
     }).then(this._isOk);
   }
 
+  setUserInfoToApi(data) {
+    return fetch(`${this._baseUrl}users/me/`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then(this._isOk);
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       method: 'GET',
