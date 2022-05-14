@@ -33,5 +33,12 @@ export default class Api {
     }).then(this._isOk);
   }
 
+  setNewCard() {
+    return fetch(`${this._baseUrl}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then(this._isOk);
+  }
   // другие методы работы с API
 }

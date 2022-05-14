@@ -74,6 +74,7 @@ enableValidation(formConfiguration);
 //заполнение popupImgage и навешивание слушателя, для дальнейшей передачи в конструктор Card
 const popupImageClass = new PopupWithImage(popupImage);
 popupImageClass.setEventListeners();
+
 function handleCardClick(name, link) {
   popupImageClass.open(name, link);
 }
@@ -116,6 +117,7 @@ const popupCardClass = new PopupWithForm((data) => {
   const newCard = {};
   newCard.name = data.popupInputCard;
   newCard.link = data.popupInputLink;
+  console.log(newCard);
   cardsList.prependItem(createCard(newCard));
 }, popupCard);
 
