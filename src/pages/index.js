@@ -8,6 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 import {
   formConfiguration,
@@ -18,10 +19,13 @@ import {
   cardForm,
   cardAddButton,
   popupImage,
+  popupConfirm,
   formValidators,
 } from "../utils/constants.js";
 
 import "../pages/index.css";
+
+const userId ={};
 
 //создание экземпляра API
 const api = new Api({
@@ -78,9 +82,13 @@ function handleCardClick(name, link) {
   popupImageClass.open(name, link);
 }
 
+//создание экземпляра попапа подтверждения
+const popupConfirmClass = new PopupWithConfirm(arguments, popupConfirm);
+popupConfirmClass.setEventListeners();
+
 //создает экземпляр карточки, заполняет его
 function createCard(item) {
-  const card = new Card(item, "#element-template", handleCardClick);
+  const card = new Card(item, "#element-template", handleCardClick, popupConfirmClass, userInfo.userId);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -100,8 +108,10 @@ cardsList.renderItems();
 const userInfo = new UserInfo({
   name: ".profile__name",
   description: ".profile__description",
-  avatar: ".profile__avatar"
+  avatar: ".profile__avatar",
+  id: userId
 }, api);
+
 
 //создание экземпляра класса Popup для попапа профайла
 const popupProfileClass = new PopupWithForm((data) => {
@@ -119,10 +129,10 @@ const popupCardClass = new PopupWithForm((data) => {
   api.setNewCard(newCard)
     .then((resp) => {
       const addCard = new Section({
-        items: resp,
+        /*items: resp,
         renderer: (item) => {
           addCard.prependItem(createCard(item));
-        }
+        }*/
       }, '.elements');
       
       addCard.prependItem(createCard(resp));

@@ -17,6 +17,8 @@ const cardAddButton = document.querySelector("#profile-add-button"); // нахо
 
 const popupImage = document.querySelector("#popup-image");
 
+const popupConfirm = document.querySelector("#popup-confirm");
+
 const formValidators = {};
 
 export {
@@ -28,5 +30,6 @@ export {
   cardForm,
   cardAddButton,
   popupImage,
+  popupConfirm,
   formValidators,
 };

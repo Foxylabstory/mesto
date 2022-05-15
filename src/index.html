@@ -164,6 +164,33 @@
       </figure>
     </div>
 
+    <div class="popup" id="popup-confirm">
+      <div class="popup__container popup__container_input_noinputs">
+        <h2 class="popup__header popup__header_input_noinputs">Вы уверены?</h2>
+        <form
+          class="popup__form"
+          id="form-confirm"
+          name="popupConfirm"
+        >
+          <fieldset class="popup__fieldset">
+            <button
+              class="popup__button popup__button_type_disable"
+              type="submit"
+              disabled
+            >
+              Да
+            </button>
+          </fieldset>
+        </form>
+        <button
+          class="popup__form-closer popup__form-closer_card"
+          id="card-closer"
+          type="button"
+          aria-label="Закрыть форму"
+        ></button>
+      </div>
+    </div>
+
     <template class="element" id="element-template">
       <div class="element">
         <div class="element__ordering">

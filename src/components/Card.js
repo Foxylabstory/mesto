@@ -1,10 +1,13 @@
 class Card {
-  constructor(data, template, handleCardClick) {
+  constructor(data, template, handleCardClick, popupConfirmClass, userId) {
     this._link = data.link;
     this._name = data.name;
     this._likes = data.likes.length;
+    this._owner = data.owner._id;
+    this._userId = userId;
     this._template = template; //выбор разметки template, ну так, на будущее...
     this._handleCardClick = handleCardClick;// получаем функцию которая заполняет popupImage и навешивает слушатель
+    this._popupConfirmClass = popupConfirmClass;//берем сразу весь экземпляр класса PopupWithConfirm
   }
 
   //получаем разметку из template
@@ -33,6 +36,9 @@ class Card {
     if (this._likes > 0) {
       this._elementLikes.textContent = this._likes;
     };
+    if (this._owner !== this._userId) {
+      this._elementDelete.remove();
+    }
 
     // Вернём элемент наружу
     return this._element;
@@ -43,7 +49,8 @@ class Card {
   }
 
   _handleDeleteCard() {
-    this._element.remove();
+    //this._element.remove();
+    this._popupConfirmClass.open();
   }
 
   _setEventListeners() {
