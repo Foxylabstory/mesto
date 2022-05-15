@@ -51,7 +51,6 @@ initialCardsFromApi.then((data) => {
     },
     ".elements"
   );
-
   //обходит массив с начальными карточками и заполняет их в DOM
   cardsList.renderItems();
 }).catch((err) => alert(err));
@@ -117,8 +116,18 @@ const popupCardClass = new PopupWithForm((data) => {
   const newCard = {};
   newCard.name = data.popupInputCard;
   newCard.link = data.popupInputLink;
-  console.log(newCard);
-  cardsList.prependItem(createCard(newCard));
+  api.setNewCard(newCard)
+    .then((resp) => {
+      const addCard = new Section({
+        items: resp,
+        renderer: (item) => {
+          addCard.prependItem(createCard(item));
+        }
+      }, '.elements');
+      
+      addCard.prependItem(createCard(resp));
+    });
+  //cardsList.prependItem(createCard(newCard));
 }, popupCard);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки

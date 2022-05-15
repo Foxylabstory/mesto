@@ -33,7 +33,7 @@ export default class Api {
     }).then(this._isOk);
   }
 
-  setNewCard() {
+  setNewCard(data) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
