@@ -2,6 +2,7 @@ class Card {
   constructor(data, template, handleCardClick) {
     this._link = data.link;
     this._name = data.name;
+    this._likes = data.likes.length;
     this._template = template; //выбор разметки template, ну так, на будущее...
     this._handleCardClick = handleCardClick;// получаем функцию которая заполняет popupImage и навешивает слушатель
   }
@@ -20,6 +21,7 @@ class Card {
     this._elementCaption = this._element.querySelector(".element__caption");
     this._elementDelete = this._element.querySelector(".element__delete");
     this._elementLike = this._element.querySelector(".element__like");
+    this._elementLikes = this._element.querySelector(".element__like-quantity");
 
     //Устанавлниваем слушатели на полученный элемент
     this._setEventListeners();
@@ -28,7 +30,9 @@ class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     this._elementCaption.textContent = this._name;
-    
+    if (this._likes > 0) {
+      this._elementLikes.textContent = this._likes;
+    };
 
     // Вернём элемент наружу
     return this._element;

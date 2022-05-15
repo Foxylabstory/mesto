@@ -66,7 +66,7 @@
               required
               maxlength="40"
               minlength="2"
-              placeholder="Введите ваше имя"
+              placeher="Введите ваше имя"
             />
             <span id="name-profile-error" class="popup__input-error"></span>
             <label class="popup__hidden-label" for="description-profile"
@@ -80,7 +80,7 @@
               required
               maxlength="200"
               minlength="2"
-              placeholder="Расскажите о себе"
+              placeher="Расскажите о себе"
             />
             <span
               id="description-profile-error"
@@ -118,7 +118,7 @@
               required
               maxlength="30"
               minlength="2"
-              placeholder="Название"
+              placeher="Название"
             />
             <span id="name-card-error" class="popup__input-error"></span>
             <label class="popup__hidden-label" for="link-card"
@@ -130,7 +130,7 @@
               name="popupInputLink"
               type="url"
               required
-              placeholder="Ссылка на картинку"
+              placeher="Ссылка на картинку"
             />
             <span id="link-card-error" class="popup__input-error"></span>
             <button
@@ -171,7 +171,10 @@
           <button class="element__delete"></button>
           <div class="element__caption-group">
             <h2 class="element__caption"></h2>
-            <button class="element__like" type="button"></button>
+            <div class="element__like-container">
+              <button class="element__like" type="button"></button>
+              <span class="element__like-quantity" id="like-quantity"></span>
+            </div>
           </div>
         </div>
       </div>
