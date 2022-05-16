@@ -40,7 +40,7 @@ const api = new Api({
 const initialUserInfoFromApi = api.getUserInfo();
 initialUserInfoFromApi.then((data) => {
   userInfo.setUserInfoFromApi({ data });
-});
+}).catch((err) => alert(`Ошибка при установке данных пользователя ${err}`));
 
 //получение начального списка карточек
 const initialCardsFromApi = api.getInitialCards();
@@ -57,7 +57,7 @@ initialCardsFromApi.then((data) => {
   );
   //обходит массив с начальными карточками и заполняет их в DOM
   cardsList.renderItems();
-}).catch((err) => alert(err));
+}).catch((err) => alert(`Ошибка при заполнении страницы карточками ${err}`));
 
 // Включение валидации
 const enableValidation = (config) => {
@@ -78,13 +78,18 @@ enableValidation(formConfiguration);
 const popupImageClass = new PopupWithImage(popupImage);
 popupImageClass.setEventListeners();
 
+//создание экземпляра попапа подтверждения
+const popupConfirmClass = new PopupWithConfirm((idCard) => {
+  api.deleteCard(idCard).then(() => {
+  }).catch((err) => {
+    alert(`Ошибка при удалении карточки ${err}`);
+  })
+}, popupConfirm);
+popupConfirmClass.setEventListeners();
+
 function handleCardClick(name, link) {
   popupImageClass.open(name, link);
 }
-
-//создание экземпляра попапа подтверждения
-const popupConfirmClass = new PopupWithConfirm(arguments, popupConfirm);
-popupConfirmClass.setEventListeners();
 
 //создает экземпляр карточки, заполняет его
 function createCard(item) {
@@ -136,7 +141,7 @@ const popupCardClass = new PopupWithForm((data) => {
       }, '.elements');
       
       addCard.prependItem(createCard(resp));
-    });
+    }).catch((err) => alert(`Ошибка при добавлении карточки ${err}`));
   //cardsList.prependItem(createCard(newCard));
 }, popupCard);
 

@@ -4,6 +4,7 @@ class Card {
     this._name = data.name;
     this._likes = data.likes.length;
     this._owner = data.owner._id;
+    this._idCard = data._id;
     this._userId = userId;
     this._template = template; //выбор разметки template, ну так, на будущее...
     this._handleCardClick = handleCardClick;// получаем функцию которая заполняет popupImage и навешивает слушатель
@@ -47,10 +48,11 @@ class Card {
   _handleLikeClick() {
     this._elementLike.classList.toggle("element__like_active");
   }
-
+  handleDeleteCard() {
+    this._element.remove();
+  }
   _handleDeleteCard() {
-    //this._element.remove();
-    this._popupConfirmClass.open();
+    this._popupConfirmClass.open(this._idCard);
   }
 
   _setEventListeners() {
