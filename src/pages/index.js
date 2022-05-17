@@ -80,10 +80,7 @@ popupImageClass.setEventListeners();
 
 //создание экземпляра попапа подтверждения
 const popupConfirmClass = new PopupWithConfirm((idCard) => {
-  api.deleteCard(idCard).then(() => {
-  }).catch((err) => {
-    alert(`Ошибка при удалении карточки ${err}`);
-  })
+  return api.deleteCard(idCard);
 }, popupConfirm);
 popupConfirmClass.setEventListeners();
 

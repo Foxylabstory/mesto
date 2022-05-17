@@ -52,7 +52,7 @@ class Card {
     this._element.remove();
   }
   _handleDeleteCard() {
-    this._popupConfirmClass.open(this._idCard);
+    this._popupConfirmClass.open(this);
   }
 
   _setEventListeners() {
