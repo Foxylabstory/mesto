@@ -90,7 +90,7 @@ function handleCardClick(name, link) {
 
 //создает экземпляр карточки, заполняет его
 function createCard(item) {
-  const card = new Card(item, "#element-template", handleCardClick, popupConfirmClass, userInfo.userId);
+  const card = new Card(item, "#element-template", handleCardClick, popupConfirmClass, userInfo.userId, api);
   const cardElement = card.generateCard();
   return cardElement;
 }

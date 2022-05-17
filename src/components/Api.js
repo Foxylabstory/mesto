@@ -47,4 +47,19 @@ export default class Api {
       headers: this._headers
     }).then(this._isOk);
   }
+
+  //https://mesto.nomoreparties.co/v1/cohort-41/cards/6283a684224b4c00271c134f/likes
+  putLike(card) {
+    return fetch(`${this._baseUrl}cards/${card}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(this._isOk);
+  }
+
+  deleteLike(card) {
+    return fetch(`${this._baseUrl}cards/${card}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(this._isOk);
+  }
 }
