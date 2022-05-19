@@ -15,13 +15,15 @@ export default class UserInfo {
     return userInfoData;
   }
 
-  setUserInfoToApi({ data }) {
+  setUserInfoToApi({ data }, popupProfileClass) {
     this._api
       .setUserInfoToApi({ name: data.popupInputName, about: data.popupInputDescription })
       .then((data) => {
         this.setUserInfoFromApi(data)
-      }).catch((err) => console.log(err));
+      }).catch((err) => console.log(err)).finally(() => popupProfileClass.loadingMessage(false));
   }
+
+  
 
   setUserInfoFromApi(data) {
     this._name.textContent = data.name;

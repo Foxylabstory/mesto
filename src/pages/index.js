@@ -120,7 +120,7 @@ const userInfo = new UserInfo({
 
 //создание экземпляра класса Popup для попапа профайла
 const popupProfileClass = new PopupWithForm((data) => {
-  userInfo.setUserInfoToApi({ data });
+  userInfo.setUserInfoToApi({ data }, popupProfileClass);
 }, popupProfile);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа профайла
@@ -141,7 +141,7 @@ const popupCardClass = new PopupWithForm((data) => {
       }, '.elements');
       
       addCard.prependItem(createCard(resp));
-    }).catch((err) => alert(`Ошибка при добавлении карточки ${err}`));
+    }).catch((err) => alert(`Ошибка при добавлении карточки ${err}`)).finally(() => popupCardClass.loadingMessage(false));
   //cardsList.prependItem(createCard(newCard));
 }, popupCard);
 
@@ -168,7 +168,7 @@ const popupAvatarClass = new PopupWithForm((data) => {
   api.setUserPicToApi(newAvatar)
     .then((data) => {
       userInfo.setUserInfoFromApi(data);
-    }).catch((err) => alert(`Ошибка при обновлении аватара ${err}`));
+    }).catch((err) => alert(`Ошибка при обновлении аватара ${err}`)).finally(() => popupAvatarClass.loadingMessage(false));
 }, popupAvatar);
 
 popupAvatarClass.setEventListeners();
