@@ -8,8 +8,8 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Произошла ошибка`);
-  };//.catch((err) => console.log(`Something going wrong ${err}`)););
+    return Promise.reject(`Произошла ошибка: ${res.status}`);
+  };
 
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me/`, {
@@ -56,7 +56,6 @@ export default class Api {
     }).then(this._isOk);
   }
 
-  //https://mesto.nomoreparties.co/v1/cohort-41/cards/6283a684224b4c00271c134f/likes
   putLike(card) {
     return fetch(`${this._baseUrl}cards/${card}/likes`, {
       method: 'PUT',

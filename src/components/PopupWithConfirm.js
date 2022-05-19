@@ -18,7 +18,7 @@ export default class PopupWithConfirm extends Popup {
       this._handleSubmitForm(this._element._idCard).then(() => {
         this._element.handleDeleteCard();
       }).catch((err) => {
-        alert(`Ошибка: ${err}`);
+        alert(`Ошибка ${err}`);
       });
       this.close();
     });

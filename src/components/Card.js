@@ -36,9 +36,7 @@ class Card {
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
     this._elementCaption.textContent = this._name;
-    /*if (this._likesLength > 0) {
-      this._elementLikes.textContent = this._likesLength;
-    };*/
+
     this._setLikeNumbers (this._likesLength);
     if (this._owner !== this._userId) {
       this._elementDelete.remove();

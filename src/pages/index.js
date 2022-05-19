@@ -2,7 +2,6 @@
 
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
-import { initialCards } from "../utils/initialCards.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -50,8 +49,7 @@ const initialCardsFromApi = api.getInitialCards();
 initialCardsFromApi.then((data) => {
   //берет созданный экземпляр карточки и добавляет в секцию
   const cardsList = new Section(
-    {
-      items: data,
+    { items: data,
       renderer: (item) => {
         cardsList.addItem(createCard(item));
       },
@@ -97,18 +95,7 @@ function createCard(item) {
   const cardElement = card.generateCard();
   return cardElement;
 }
-/*
-//берет созданный экземпляр карточки и добавляет в секцию
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardsList.addItem(createCard(item));
-  }
-}, '.elements');
 
-//обходит массив с начальными карточками и заполняет их в DOM
-cardsList.renderItems();
-*/
 //создание экземпляра класса UserInfo содержащий объект с данными о пользователе
 const userInfo = new UserInfo({
   name: ".profile__name",
@@ -133,16 +120,9 @@ const popupCardClass = new PopupWithForm((data) => {
   newCard.link = data.popupInputLink;
   api.setNewCard(newCard)
     .then((resp) => {
-      const addCard = new Section({
-        /*items: resp,
-        renderer: (item) => {
-          addCard.prependItem(createCard(item));
-        }*/
-      }, '.elements');
-      
+      const addCard = new Section({}, '.elements');
       addCard.prependItem(createCard(resp));
     }).catch((err) => alert(`Ошибка при добавлении карточки ${err}`)).finally(() => popupCardClass.loadingMessage(false));
-  //cardsList.prependItem(createCard(newCard));
 }, popupCard);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки
@@ -162,6 +142,7 @@ cardAddButton.addEventListener("click", function () {
   popupCardClass.open();
 });
 
+//попап смены аватарки
 const popupAvatarClass = new PopupWithForm((data) => {
   const newAvatar = {};
   newAvatar.avatar = data.popupInputLinkAvatar;
@@ -173,6 +154,7 @@ const popupAvatarClass = new PopupWithForm((data) => {
 
 popupAvatarClass.setEventListeners();
 
+//открытие попапа редактирования аватара
 avatarChangeButton.addEventListener("click", function () {
   formValidators[avatarForm.getAttribute("name")].resetValidation();
   popupAvatarClass.open();
