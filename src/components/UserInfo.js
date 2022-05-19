@@ -19,13 +19,11 @@ export default class UserInfo {
     this._api
       .setUserInfoToApi({ name: data.popupInputName, about: data.popupInputDescription })
       .then((data) => {
-        this.setUserInfoFromApi({ data })
+        this.setUserInfoFromApi(data)
       }).catch((err) => console.log(err));
-    //this._name.textContent = data.popupInputName;
-    //this._description.textContent = data.popupInputDescription;
   }
 
-  setUserInfoFromApi({ data }) {
+  setUserInfoFromApi(data) {
     this._name.textContent = data.name;
     this._description.textContent = data.about;
     this._avatar.style.backgroundImage = `url(${data.avatar})`;

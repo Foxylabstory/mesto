@@ -15,6 +15,9 @@ import {
   popupProfile,
   profileEditButton,
   profileForm,
+  popupAvatar,
+  avatarChangeButton,
+  avatarForm,
   popupCard,
   cardForm,
   cardAddButton,
@@ -39,7 +42,7 @@ const api = new Api({
 //установка инфо о пользователе при загрузке
 const initialUserInfoFromApi = api.getUserInfo();
 initialUserInfoFromApi.then((data) => {
-  userInfo.setUserInfoFromApi({ data });
+  userInfo.setUserInfoFromApi(data);
 }).catch((err) => alert(`Ошибка при установке данных пользователя ${err}`));
 
 //получение начального списка карточек
@@ -158,6 +161,22 @@ cardAddButton.addEventListener("click", function () {
   formValidators[cardForm.getAttribute("name")].resetValidation();
   popupCardClass.open();
 });
+
+const popupAvatarClass = new PopupWithForm((data) => {
+  const newAvatar = {};
+  newAvatar.avatar = data.popupInputLinkAvatar;
+  api.setUserPicToApi(newAvatar)
+    .then((data) => {
+      userInfo.setUserInfoFromApi(data);
+    }).catch((err) => alert(`Ошибка при обновлении аватара ${err}`));
+}, popupAvatar);
+
+popupAvatarClass.setEventListeners();
+
+avatarChangeButton.addEventListener("click", function () {
+  formValidators[avatarForm.getAttribute("name")].resetValidation();
+  popupAvatarClass.open();
+})
 /*popups.forEach((popup) => {
   const popupClass = new Popup(popup);
   popupClass.setEventListeners();  

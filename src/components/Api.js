@@ -26,6 +26,14 @@ export default class Api {
     }).then(this._isOk);
   }
 
+  setUserPicToApi(url) {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(url)
+    }).then(this._isOk);
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       method: 'GET',

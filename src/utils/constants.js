@@ -19,6 +19,10 @@ const popupImage = document.querySelector("#popup-image");
 
 const popupConfirm = document.querySelector("#popup-confirm");
 
+const popupAvatar = document.querySelector("#popup-avatar");
+const avatarChangeButton = document.querySelector(".profile__avatar");
+const avatarForm = document.forms.popupFormAvatar;
+
 const formValidators = {};
 
 export {
@@ -26,6 +30,9 @@ export {
   popupProfile,
   profileEditButton,
   profileForm,
+  popupAvatar,
+  avatarChangeButton,
+  avatarForm,
   popupCard,
   cardForm,
   cardAddButton,

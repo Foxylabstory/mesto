@@ -57,11 +57,11 @@ class Card {
   }
 
   _isLiked(likes) {
-    likes.some(user => user._id === this._userId)
+    return likes.some(user => user._id === this._userId)
   }
 
   _setLikeClasslist(likes) {
-    if (likes.some(user => user._id === this._userId)) {
+    if (this._isLiked(likes)) {
       this._elementLike.classList.add("element__like_active");
     } else {
       this._elementLike.classList.remove("element__like_active");
@@ -69,16 +69,14 @@ class Card {
   }
 
   _handleLikeClick() {
-    if (this._likes.some(user => user._id === this._userId)) {
+    if (this._isLiked(this._likes)) {
       this._api.deleteLike(this._idCard).then((data) => {
-        //this._elementLikes.textContent = data.likes.length;
         this._setLikeNumbers (data.likes.length);
         this._likes = data.likes;
         this._setLikeClasslist(data.likes);
       }).catch((err) => alert(`Ошибка при снятии лайка. ${err}`));
     } else {
       this._api.putLike(this._idCard).then((data) => {
-        //this._elementLikes.textContent = data.likes.length;
         this._setLikeNumbers (data.likes.length);
         this._likes = data.likes;
         this._setLikeClasslist(data.likes);
