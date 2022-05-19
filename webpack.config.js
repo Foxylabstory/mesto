@@ -246,6 +246,25 @@ package.json новый скрипт — deploy
    "predeploy": "npm run build",
    "deploy": "gh-pages -d dist"
  }
+
+npm install gh-pages --save-dev - 
+package.json в разделе devDependencies появится новая строка:
+ devDependencies: {
+   ...
+     "gh-pages": "^3.1.0"
+   ...
+ }
+ package.json:
+ scripts: {
+   ...
+   "predeploy": "npm run build",
+   "deploy": "gh-pages -d dist"
+ }
+ if (Couldn't find remote ref refs/heads/gh-pages) {
+   npx gh-pages-clean
+  } else {
+    npm run deploy
+  }
 */
 
 const path = require('path');
