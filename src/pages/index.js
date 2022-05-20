@@ -27,7 +27,7 @@ import {
 
 import "../pages/index.css";
 
-const userId ={};
+const userId = {};
 
 //создание экземпляра API
 const api = new Api({
@@ -38,8 +38,19 @@ const api = new Api({
   },
 });
 
+//создание экземпляра класса UserInfo содержащий объект с данными о пользователе
+const userInfo = new UserInfo(
+  {
+    name: ".profile__name",
+    description: ".profile__description",
+    avatar: ".profile__avatar",
+    id: userId,
+  },
+  api
+);
+
 //установка инфо о пользователе при загрузке
-const initialUserInfoFromApi = api.getUserInfo();
+/*const initialUserInfoFromApi = api.getUserInfo();
 initialUserInfoFromApi.then((data) => {
   userInfo.setUserInfoFromApi(data);
 }).catch((err) => alert(`Ошибка при установке данных пользователя ${err}`));
@@ -59,6 +70,22 @@ initialCardsFromApi.then((data) => {
   //обходит массив с начальными карточками и заполняет их в DOM
   cardsList.renderItems();
 }).catch((err) => alert(`Ошибка при заполнении страницы карточками ${err}`));
+*/
+
+//создает экземпляр секции, где сказано куда и каким методом будем добавлять карточки
+const cardsList = new Section((item) => cardsList.addItem(createCard(item)), ".elements");
+
+//запрашиваем у сервера данные по пользователю и массив карточке, только после этого добавляем их секцию
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    // тут установка данных пользователя
+    userInfo.setUserInfoFromApi(userData);
+    //обходит массив с начальными карточками и заполняет их в DOM
+    cardsList.renderItems(cards);
+  })
+  .catch((err) => {
+    alert(`Ошибка ${err}`);
+  });
 
 // Включение валидации
 const enableValidation = (config) => {
@@ -91,19 +118,17 @@ function handleCardClick(name, link) {
 
 //создает экземпляр карточки, заполняет его
 function createCard(item) {
-  const card = new Card(item, "#element-template", handleCardClick, popupConfirmClass, userInfo.userId, api);
+  const card = new Card(
+    item,
+    "#element-template",
+    handleCardClick,
+    popupConfirmClass,
+    userInfo.userId,
+    api
+  );
   const cardElement = card.generateCard();
   return cardElement;
 }
-
-//создание экземпляра класса UserInfo содержащий объект с данными о пользователе
-const userInfo = new UserInfo({
-  name: ".profile__name",
-  description: ".profile__description",
-  avatar: ".profile__avatar",
-  id: userId
-}, api);
-
 
 //создание экземпляра класса Popup для попапа профайла
 const popupProfileClass = new PopupWithForm((data) => {
@@ -118,11 +143,15 @@ const popupCardClass = new PopupWithForm((data) => {
   const newCard = {};
   newCard.name = data.popupInputCard;
   newCard.link = data.popupInputLink;
-  api.setNewCard(newCard)
+  api
+    .setNewCard(newCard)
     .then((resp) => {
-      const addCard = new Section({}, '.elements');
-      addCard.prependItem(createCard(resp));
-    }).catch((err) => alert(`Ошибка при добавлении карточки ${err}`)).finally(() => popupCardClass.loadingMessage(false));
+      //const addCard = new Section({}, ".elements");
+      cardsList.prependItem(createCard(resp));
+    })
+    .then(popupCardClass.close())
+    .catch((err) => alert(`Ошибка при добавлении карточки ${err}`))
+    .finally(() => popupCardClass.loadingMessage(false));
 }, popupCard);
 
 //обрабатывает событие по нажатию на кнопку сохранить для попапа добавления карточки
@@ -146,10 +175,14 @@ cardAddButton.addEventListener("click", function () {
 const popupAvatarClass = new PopupWithForm((data) => {
   const newAvatar = {};
   newAvatar.avatar = data.popupInputLinkAvatar;
-  api.setUserPicToApi(newAvatar)
+  api
+    .setUserPicToApi(newAvatar)
     .then((data) => {
       userInfo.setUserInfoFromApi(data);
-    }).catch((err) => alert(`Ошибка при обновлении аватара ${err}`)).finally(() => popupAvatarClass.loadingMessage(false));
+    })
+    .then(() => popupAvatarClass.close())
+    .catch((err) => alert(`Ошибка при обновлении аватара ${err}`))
+    .finally(() => popupAvatarClass.loadingMessage(false));
 }, popupAvatar);
 
 popupAvatarClass.setEventListeners();
@@ -158,7 +191,7 @@ popupAvatarClass.setEventListeners();
 avatarChangeButton.addEventListener("click", function () {
   formValidators[avatarForm.getAttribute("name")].resetValidation();
   popupAvatarClass.open();
-})
+});
 /*popups.forEach((popup) => {
   const popupClass = new Popup(popup);
   popupClass.setEventListeners();  

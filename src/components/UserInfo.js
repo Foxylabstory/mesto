@@ -20,7 +20,7 @@ export default class UserInfo {
       .setUserInfoToApi({ name: data.popupInputName, about: data.popupInputDescription })
       .then((data) => {
         this.setUserInfoFromApi(data)
-      }).catch((err) => console.log(err)).finally(() => popupProfileClass.loadingMessage(false));
+      }).then(popupProfileClass.close()).catch((err) => console.log(err)).finally(() => popupProfileClass.loadingMessage(false));
   }
 
   
